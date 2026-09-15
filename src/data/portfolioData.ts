@@ -1,4 +1,19 @@
-import { PortfolioData } from '../types.ts';
+import { PortfolioData, EvidenceLink } from '../types.ts';
+
+// Gedeelde bewijsstukken en links voor hergebruik tussen Sprints en Leeruitkomsten
+export const SHARED_EVIDENCE = {
+  researchKerntaken: {
+    links: [
+      { label: 'Bekijk Presentatie', url: '[MAX: link invullen]' },
+      { label: 'Bekijk Document', url: '[MAX: link invullen]' },
+    ] as EvidenceLink[],
+  },
+  userPortfolioSite: {
+    links: [
+      { label: 'Bekijk Live Website', url: '/' },
+    ] as EvidenceLink[],
+  },
+};
 
 export const portfolioData: PortfolioData = {
   student: {
@@ -38,19 +53,19 @@ export const portfolioData: PortfolioData = {
       {
         title: 'Procesontleding & Modellering',
         description:
-          'Het vermogen om complexe bedrijfsprocessen snel te doorgronden, knelpunten te identificeren en gestructureerd uit te tekenen in standaarden als BPMN.',
+          'Ik zie snel waar een bedrijfsproces vastloopt en kan dat overzichtelijk in een schema zetten.',
         tag: 'Bedrijfskunde',
       },
       {
         title: 'Workflow Automatisering',
         description:
-          'Praktijkervaring met low-code orchestration (Power Automate, n8n) en het integreren van REST API-koppelingen tussen verschillende systemen.',
+          "Ik heb ervaring met het bouwen van automatische workflows in Power Automate en n8n, en het koppelen van verschillende programma's aan elkaar.",
         tag: 'Technologie',
       },
       {
         title: 'Analytisch & Pragmatisch',
         description:
-          'Snel schakelen tussen strategische doelen van de organisatie en praktische, haalbare oplossingen op de werkvloer.',
+          'Ik schakel snel tussen het grote plaatje van een organisatie en concrete, werkbare oplossingen op de werkvloer.',
         tag: 'Executie',
       },
     ],
@@ -68,10 +83,10 @@ export const portfolioData: PortfolioData = {
         tag: 'Optimalisatie',
       },
       {
-        title: 'Kennis Delen & Co-creatie',
+        title: 'Vrienden & Gezelligheid',
         description:
-          'Complexe technologische materie begrijpelijk uitleggen aan niet-technische stakeholders en samen tot gedragen oplossingen komen.',
-        tag: 'Samenwerking',
+          'Tijd doorbrengen met vrienden en familie en samen dingen ondernemen geeft mij naast mijn studie energie.',
+        tag: 'Sociaal',
       },
     ],
     ambitions: {
@@ -105,14 +120,16 @@ export const portfolioData: PortfolioData = {
       evidence: [
         {
           id: 'ev-lu1-1',
-          title: 'Voorbeeld: Trendrapport AI binnen Supply Chain & Procesautomatisering',
+          title: 'Onderzoek: Veranderende kerntaken van de procesmanager door AI',
           storyType: 'Research',
-          format: 'PDF Rapport',
-          status: 'In uitvoering',
-          dateOrSprint: 'Sprint 2',
+          format: 'Document',
+          formats: ['Presentatie', 'Document'],
+          status: 'Afgerond',
+          dateOrSprint: 'Sprint 1',
           summary:
-            'Vergelijkende analyse van agentic workflows versus traditionele RPA binnen logistieke administratie.',
-          tag: 'Literatuurstudie',
+            'Grondig deskresearch naar de impact van generatieve en agentische AI op de kerntaken, competenties en operationele verantwoordelijkheden van de moderne procesmanager.',
+          links: SHARED_EVIDENCE.researchKerntaken.links,
+          tag: 'Deskresearch',
         },
         {
           id: 'ev-lu1-2',
@@ -282,30 +299,30 @@ export const portfolioData: PortfolioData = {
 
   research: {
     title:
-      '[MAX: Centrale onderzoeksvraag invullen — bv. Hoe kan de inzet van agentic AI-workflows de operationele doorlooptijd en foutmarge in order-to-cash processen reduceren?]',
+      'Hoe kan een procesmanager binnen een productie- of dienstverlenende organisatie generatieve en agentische AI verantwoord inzetten om operationele processen te optimaliseren, zonder in te boeten aan controle, transparantie en medewerkersbetrokkenheid?',
     subtitle:
       'Praktijkgericht afstudeer- en minoronderzoek naar de symbiose van procesoptimalisatie en kunstmatige intelligentie.',
     field: 'Procesmanagement & Technische Bedrijfskunde',
-    status: 'Onderzoek volgt binnenkort',
+    status: 'Onderzoek in voorbereiding',
     summary:
       'Dit onderzoek richt zich op het inzichtelijk maken hoe generatieve en agentische AI-oplossingen op verantwoorde wijze kunnen worden geïmplementeerd binnen MKB-productie- en handelsbedrijven. Hierbij wordt onderzocht waar de omslag ligt tussen traditionele procesautomatisering (zoals RPA/Power Automate) en autonome cognitieve agents, met speciale aandacht voor traceerbaarheid, audit trails en menselijke tussenkomst.',
     subQuestions: [
       {
         number: 'Deelvraag 1',
         question:
-          '[MAX: Deelvraag 1 — Welke knelpunten in administratieve procesketens lenen zich bij uitstek voor AI-interventies?]',
+          'Welke taken en verantwoordelijkheden van een procesmanager veranderen het meest door de opkomst van generatieve en agentische AI, en welke kennis en vaardigheden zijn daarvoor nodig?',
         purpose: 'Literatuur- en procesanalyse (LU1)',
       },
       {
         number: 'Deelvraag 2',
         question:
-          '[MAX: Deelvraag 2 — Aan welke technische en ethische ontwerpeisen moet een agentic workflow voldoen om betrouwbare output te garanderen?]',
+          'Aan welke ethische en technische randvoorwaarden — zoals transparantie, uitlegbaarheid en menselijke controle — moet een AI-ondersteund procesmanagementsysteem voldoen om verantwoord te kunnen worden ingezet?',
         purpose: 'Ethisch en technisch kader (LU3 & LU4)',
       },
       {
         number: 'Deelvraag 3',
         question:
-          '[MAX: Deelvraag 3 — Wat is de meetbare kwantitatieve en kwalitatieve business impact na implementatie van een proof-of-concept?]',
+          'Wat is de meetbare impact, in tijd, kosten en kwaliteit, van een AI-gedreven proof-of-concept op een concreet bedrijfsproces, vergeleken met de huidige (handmatige of RPA-gebaseerde) werkwijze?',
         purpose: 'Praktijkvalidatie en ROI (LU2)',
       },
     ],
@@ -318,37 +335,37 @@ export const portfolioData: PortfolioData = {
   projects: [
     {
       id: 'proj-1',
-      title: 'Project 1 — in ontwikkeling',
+      title: 'Project 1',
       status: 'In ontwikkeling',
       sprint: 'Sprint 1 - 2',
       description:
-        '[MAX: Korte toelichting op Project 1 — bv. Geautomatiseerde Factuur- en Pakbonanalyse met gestructureerde LLM-extractie gekoppeld aan ERP].',
-      learningOutcomes: ['LU2', 'LU4'],
-      techStack: ['Python', 'n8n', 'OpenAI API', 'JSON Schema'],
+        'Wordt binnenkort toegevoegd zodra dit prototype in ontwikkeling gaat.',
+      learningOutcomes: [],
+      techStack: [],
       demoUrl: undefined,
       githubUrl: undefined,
     },
     {
       id: 'proj-2',
-      title: 'Project 2 — in ontwikkeling',
-      status: 'In ontwikkeling',
+      title: 'Project 2',
+      status: 'Gepland',
       sprint: 'Sprint 3 - 4',
       description:
-        '[MAX: Korte toelichting op Project 2 — bv. Interne Proceskennisbank & Copilot voor kwaliteitsmedewerkers op basis van RAG (Retrieval-Augmented Generation)].',
-      learningOutcomes: ['LU2', 'LU3', 'LU4'],
-      techStack: ['ChromaDB', 'FastAPI', 'LangChain', 'Tailwind CSS'],
+        'Wordt binnenkort toegevoegd zodra dit prototype in ontwikkeling gaat.',
+      learningOutcomes: [],
+      techStack: [],
       demoUrl: undefined,
       githubUrl: undefined,
     },
     {
       id: 'proj-3',
-      title: 'Project 3 — in ontwikkeling',
+      title: 'Project 3',
       status: 'Gepland',
       sprint: 'Sprint 5 - 6',
       description:
-        '[MAX: Korte toelichting op Project 3 — bv. Autonome Supply Chain Incident Agent die vertragingen signaleert en concept-oplossingen voorlegt aan de planner].',
-      learningOutcomes: ['LU1', 'LU2', 'LU4'],
-      techStack: ['Node.js', 'PostgreSQL', 'Multi-Agent Framework', 'Power Automate'],
+        'Wordt binnenkort toegevoegd zodra dit prototype in ontwikkeling gaat.',
+      learningOutcomes: [],
+      techStack: [],
       demoUrl: undefined,
       githubUrl: undefined,
     },
@@ -368,6 +385,8 @@ export const portfolioData: PortfolioData = {
             role: 'student Technische Bedrijfskunde',
             goal: 'via deskresearch onderzoeken welke kerntaken van een procesmanager gaan veranderen door generatieve AI',
             value: 'ik onderbouwd kan bepalen welke kennis en vaardigheden ik verder moet ontwikkelen.',
+            status: 'Afgerond',
+            evidenceLinks: SHARED_EVIDENCE.researchKerntaken.links,
             acceptanceCriteria: [
               'Minimaal 3 kerntaken van een procesmanager zijn geïdentificeerd en onderzocht',
               'Per kerntaak zijn de kansen én risico\'s van AI beschreven',
@@ -383,6 +402,8 @@ export const portfolioData: PortfolioData = {
             role: 'student Technische Bedrijfskunde',
             goal: 'via deskresearch onderzoeken welke AI-functionaliteiten beschikbaar zijn binnen n8n en Power Automate',
             value: 'ik onderbouwd kan bepalen hoe ik deze tools in de toekomst effectiever kan inzetten.',
+            status: 'Nog te doen',
+            evidenceNote: 'Bewijs volgt zodra deze story is afgerond.',
             acceptanceCriteria: [
               'Voor beide tools is onderzocht welke AI-functionaliteiten beschikbaar zijn',
               'Per functionaliteit is beschreven welk type processtap hiermee geautomatiseerd of verbeterd kan worden',
@@ -403,6 +424,8 @@ export const portfolioData: PortfolioData = {
             role: 'student',
             goal: 'met AI Studio/Lovable een eigen portfoliowebsite bouwen',
             value: 'ik daar mijn bewijs per leeruitkomst op kan verzamelen.',
+            status: 'In uitvoering',
+            evidenceLinks: SHARED_EVIDENCE.userPortfolioSite.links,
             acceptanceCriteria: [
               'De website is online en heeft per leeruitkomst een eigen, herkenbare sectie',
               'Bewijsstukken (documenten, links, screenshots) kunnen per leeruitkomst worden toegevoegd en bekeken',
@@ -418,6 +441,8 @@ export const portfolioData: PortfolioData = {
             role: 'procesmanager',
             goal: 'een herbruikbaar promptsjabloon ontwikkelen waarmee ik AI kan inzetten om processen te analyseren',
             value: 'ik dit sjabloon in latere sprints steeds opnieuw kan gebruiken.',
+            status: 'Nog te doen',
+            evidenceNote: 'Bewijs volgt zodra deze story is afgerond.',
             acceptanceCriteria: [
               'Er is een werkend promptsjabloon dat AI vraagt om een proces te analyseren (stappen, knelpunten, verbeterpunten)',
               'Het sjabloon is minimaal 1 keer getest op een voorbeeldproces',
@@ -437,8 +462,8 @@ export const portfolioData: PortfolioData = {
             role: 'student',
             goal: 'eerste leerervaringen en methodische reflectie vormgeven',
             value: 'ik doelgericht kan bijsturen in de opvolgende sprints.',
-            isPlaceholder: true,
-            notes: 'Komt binnenkort — Deze Learning Story wordt spoedig geformuleerd tijdens de Sprint 1 retrospective.',
+            status: 'In uitvoering',
+            evidenceNote: 'Bewijs volgt zodra deze story is afgerond.',
           },
         ],
       },
@@ -451,33 +476,15 @@ export const portfolioData: PortfolioData = {
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
-        stories: [
-          {
-            role: 'Onderzoeker',
-            goal: 'de ethische kaders en AVG-risico’s van externe cloud LLM APIs vergelijken met on-premise alternatieven',
-            value: 'wij verantwoorde architectuurbesluiten kunnen nemen voor bedrijfsgevoelige data.',
-          },
-        ],
+        stories: [],
       },
       userStories: {
         linkedLUs: ['LU2', 'LU4'],
-        stories: [
-          {
-            role: 'Eindgebruiker',
-            goal: 'een drag-and-drop interface waarmee documenten kunnen worden geüpload en direct verwerkt',
-            value: 'ik niet handmatig via de command line hoef te werken.',
-          },
-        ],
+        stories: [],
       },
       learningStories: {
         linkedLUs: ['LU4', 'LU5'],
-        stories: [
-          {
-            role: 'Student',
-            goal: 'mijn programmeervaardigheden in Python versterken rond vector databases',
-            value: 'ik zelfstandig embeddings kan genereren voor procesdocumentatie.',
-          },
-        ],
+        stories: [],
       },
     },
     {
@@ -488,33 +495,15 @@ export const portfolioData: PortfolioData = {
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
-        stories: [
-          {
-            role: 'Onderzoeker',
-            goal: 'de eerste deelvraag uitwerken met veldonderzoek en stakeholder-interviews',
-            value: 'de context van het knelpunt scherp en gevalideerd is.',
-          },
-        ],
+        stories: [],
       },
       userStories: {
         linkedLUs: ['LU2', 'LU4'],
-        stories: [
-          {
-            role: 'Kwaliteitsmedewerker',
-            goal: 'direct inzicht krijgen in procesafwijkingen via geautomatiseerde samenvattingen',
-            value: 'ik sneller corrigerende acties kan initiëren.',
-          },
-        ],
+        stories: [],
       },
       learningStories: {
         linkedLUs: ['LU4', 'LU5'],
-        stories: [
-          {
-            role: 'Student',
-            goal: 'leren hoe ik gestructureerde gebruikerstests opzet en kwalitatieve feedback verwerk',
-            value: 'mijn productiteraties aantoonbaar evidence-based zijn.',
-          },
-        ],
+        stories: [],
       },
     },
     {
@@ -525,33 +514,15 @@ export const portfolioData: PortfolioData = {
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
-        stories: [
-          {
-            role: 'Student',
-            goal: 'de midterm bewijsstukken voor LU1 en LU3 bundelen en reviewen met de docent-coach',
-            value: 'ik tijdig weet of ik op koers lig voor de eindbeoordeling.',
-          },
-        ],
+        stories: [],
       },
       userStories: {
         linkedLUs: ['LU2', 'LU4'],
-        stories: [
-          {
-            role: 'Stakeholder',
-            goal: 'een live demonstratie zien van het eerste prototype met meetbare KPI-verbetering',
-            value: 'ik de meerwaarde van het project kan beoordelen.',
-          },
-        ],
+        stories: [],
       },
       learningStories: {
         linkedLUs: ['LU4', 'LU5'],
-        stories: [
-          {
-            role: 'Student',
-            goal: 'reflecteren op de samenwerking en mijn sprint-velocity van de afgelopen 4 sprints',
-            value: 'ik mijn planning voor de tweede helft van de minor kan optimaliseren.',
-          },
-        ],
+        stories: [],
       },
     },
     {
@@ -562,33 +533,15 @@ export const portfolioData: PortfolioData = {
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
-        stories: [
-          {
-            role: 'Onderzoeker',
-            goal: 'de tweede deelvraag onderzoeken m.b.t. betrouwbaarheid en fallback-scenario’s',
-            value: 'het tweede prototype voldoet aan robuuste procesnormen.',
-          },
-        ],
+        stories: [],
       },
       userStories: {
         linkedLUs: ['LU2', 'LU4'],
-        stories: [
-          {
-            role: 'Procesmanager',
-            goal: 'een geautomatiseerde alert ontvangen bij anomalieën in orderverwerking',
-            value: 'ik proactief kan bijsturen in plaats van achteraf brandjes blussen.',
-          },
-        ],
+        stories: [],
       },
       learningStories: {
         linkedLUs: ['LU4', 'LU5'],
-        stories: [
-          {
-            role: 'Student',
-            goal: 'mijzelf bekwamen in het testen en benchmarken van agentic reasoning loops',
-            value: 'ik onvoorziene modelbeslissingen vroegtijdig kan traceren.',
-          },
-        ],
+        stories: [],
       },
     },
     {
@@ -599,33 +552,15 @@ export const portfolioData: PortfolioData = {
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
-        stories: [
-          {
-            role: 'Onderzoeker',
-            goal: 'alle meetresultaten analyseren en het definitieve onderzoeksrapport schrijven',
-            value: 'het centrale onderzoeksdoel volledig beantwoord en gepubliceerd kan worden.',
-          },
-        ],
+        stories: [],
       },
       userStories: {
         linkedLUs: ['LU2', 'LU4'],
-        stories: [
-          {
-            role: 'Testgebruiker',
-            goal: 'eenvoudig feedback kunnen geven binnen de interface van het prototype',
-            value: 'mijn observaties direct meegenomen worden in de finale optimalisatieslag.',
-          },
-        ],
+        stories: [],
       },
       learningStories: {
         linkedLUs: ['LU4', 'LU5'],
-        stories: [
-          {
-            role: 'Student',
-            goal: 'feedback verwerken op conceptversies van het onderzoeksverslag van peer reviewers',
-            value: 'de academische en praktische kwaliteit gewaarborgd is.',
-          },
-        ],
+        stories: [],
       },
     },
     {
@@ -636,33 +571,15 @@ export const portfolioData: PortfolioData = {
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
-        stories: [
-          {
-            role: 'Student',
-            goal: 'de koppeling tussen onderzoeksconclusies en praktijkontwerp aanscherpen',
-            value: 'de rode draad in mijn minorportfolio onweerlegbaar helder is.',
-          },
-        ],
+        stories: [],
       },
       userStories: {
         linkedLUs: ['LU2', 'LU4'],
-        stories: [
-          {
-            role: 'Beoordelaar / Assessor',
-            goal: 'alle broncode, screencasts en rapporten intuïtief kunnen openen vanaf de website',
-            value: 'de toetsing soepel en transparant verloopt.',
-          },
-        ],
+        stories: [],
       },
       learningStories: {
         linkedLUs: ['LU4', 'LU5'],
-        stories: [
-          {
-            role: 'Student',
-            goal: 'een integrale eindreflectie schrijven over mijn groei als AI-bewuste technisch bedrijfskundige',
-            value: 'ik overtuigend kan aantonen aan LU5 voldaan te hebben.',
-          },
-        ],
+        stories: [],
       },
     },
     {
@@ -673,33 +590,15 @@ export const portfolioData: PortfolioData = {
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
-        stories: [
-          {
-            role: 'Afstuderende student',
-            goal: 'mijn eindrapport en ethische toetsing verdedigen tijdens het criteriumgericht interview',
-            value: 'ik mijn vakkennis met overtuiging demonstreer.',
-          },
-        ],
+        stories: [],
       },
       userStories: {
         linkedLUs: ['LU2', 'LU4'],
-        stories: [
-          {
-            role: 'Bezoeker van de AI-expo',
-            goal: 'een interactieve live demonstratie ervaren van de gerealiseerde AI-agent',
-            value: 'ik de directe impact op procesdoorlooptijden kan ervaren.',
-          },
-        ],
+        stories: [],
       },
       learningStories: {
         linkedLUs: ['LU4', 'LU5'],
-        stories: [
-          {
-            role: 'Student',
-            goal: 'mijn leercurve over de 20 weken consolideren in een toekomstgericht ontwikkelplan',
-            value: 'ik deze AI-vaardigheden direct kan verzilveren in mijn afstudeeropdracht.',
-          },
-        ],
+        stories: [],
       },
     },
   ],

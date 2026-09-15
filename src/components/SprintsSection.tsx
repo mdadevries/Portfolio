@@ -7,12 +7,165 @@ import {
   Clock,
   CheckCircle2,
   ChevronRight,
+  ChevronDown,
   ListChecks,
   Award,
+  ExternalLink,
+  CircleDashed,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { portfolioData } from '../data/portfolioData.ts';
-import { SprintData } from '../types.ts';
+import { SprintData, SprintStory, StoryStatus } from '../types.ts';
+
+interface StoryCardItemProps {
+  story: SprintStory;
+  accent: 'indigo' | 'cyan' | 'amber';
+}
+
+const StoryCardItem: React.FC<StoryCardItemProps> = ({ story, accent }) => {
+  const [isCriteriaOpen, setIsCriteriaOpen] = useState(false);
+
+  const roleColorClass =
+    accent === 'indigo'
+      ? 'text-indigo-400'
+      : accent === 'cyan'
+      ? 'text-cyan-400'
+      : 'text-amber-400';
+
+  const hasCriteria = Boolean(
+    (story.acceptanceCriteria && story.acceptanceCriteria.length > 0) ||
+      (story.qualityCriteria && story.qualityCriteria.length > 0)
+  );
+
+  const getStoryStatusBadge = (status?: StoryStatus) => {
+    switch (status) {
+      case 'Afgerond':
+        return (
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
+            <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+            Afgerond
+          </span>
+        );
+      case 'In uitvoering':
+        return (
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-cyan-500/15 border border-cyan-500/30 text-cyan-300">
+            <Clock className="w-3 h-3 text-cyan-400" />
+            In uitvoering
+          </span>
+        );
+      case 'Nog te doen':
+      default:
+        return (
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#0A1A33] border border-[#1E3A68] text-slate-300">
+            <CircleDashed className="w-3 h-3 text-slate-400" />
+            Nog te doen
+          </span>
+        );
+    }
+  };
+
+  return (
+    <div className="p-3.5 rounded-2xl bg-[#08152B]/85 border border-[#1E3A68]">
+      {/* Story narrative */}
+      <p className="text-xs text-slate-200 leading-relaxed font-mono">
+        <span className={`${roleColorClass} font-bold`}>Als</span> {story.role},{' '}
+        <span className={`${roleColorClass} font-bold`}>wil ik</span> {story.goal},{' '}
+        <span className={`${roleColorClass} font-bold`}>zodat</span> {story.value}
+      </p>
+
+      {/* Collapsible Criteria (Accordion, default collapsed) */}
+      {hasCriteria && (
+        <div className="mt-3">
+          <button
+            type="button"
+            onClick={() => setIsCriteriaOpen((prev) => !prev)}
+            className="w-full flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-xl bg-[#0A1A33] hover:bg-[#0E2244] border border-[#1E3A68] text-slate-300 hover:text-white transition-colors text-left group"
+          >
+            <span className="flex items-center gap-1.5 text-[11px] font-semibold">
+              <ListChecks className={`w-3.5 h-3.5 ${roleColorClass}`} />
+              <span>Bekijk Acceptatie- & Kwaliteitscriteria</span>
+            </span>
+            <ChevronDown
+              className={`w-3.5 h-3.5 text-slate-400 group-hover:text-slate-200 transition-transform duration-200 ${
+                isCriteriaOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+
+          {isCriteriaOpen && (
+            <div className="mt-2.5 pt-2 border-t border-[#1E3A68]/60 space-y-2.5">
+              {story.acceptanceCriteria && story.acceptanceCriteria.length > 0 && (
+                <div className="text-[11px] text-slate-300">
+                  <span className="font-semibold text-slate-200 flex items-center gap-1 mb-1">
+                    <ListChecks className={`w-3 h-3 ${roleColorClass}`} />
+                    Acceptatiecriteria:
+                  </span>
+                  <ul className="list-disc pl-4 space-y-0.5">
+                    {story.acceptanceCriteria.map((ac, idx) => (
+                      <li key={idx}>{ac}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {story.qualityCriteria && story.qualityCriteria.length > 0 && (
+                <div className="text-[11px] text-slate-300">
+                  <span className="font-semibold text-slate-200 flex items-center gap-1 mb-1">
+                    <Award className={`w-3 h-3 ${roleColorClass}`} />
+                    Kwaliteitscriteria:
+                  </span>
+                  <ul className="list-disc pl-4 space-y-0.5">
+                    {story.qualityCriteria.map((qc, idx) => (
+                      <li key={idx}>{qc}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Story Status & Bewijsmateriaal Block (Always visible) */}
+      <div className="mt-3.5 pt-3 border-t border-[#1E3A68]/70 flex flex-col gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[11px] font-semibold text-slate-300">Status:</span>
+          {getStoryStatusBadge(story.status || 'Nog te doen')}
+        </div>
+
+        <div className="pt-1 flex flex-col gap-1.5">
+          <span className="text-[11px] font-semibold text-slate-300">Bewijsmateriaal:</span>
+          {story.evidenceLinks && story.evidenceLinks.length > 0 ? (
+            <div className="flex flex-wrap items-center gap-2 pt-0.5">
+              {story.evidenceLinks.map((link, lIdx) => (
+                <a
+                  key={lIdx}
+                  href={link.url}
+                  target={link.url.startsWith('http') ? '_blank' : undefined}
+                  rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/15 text-cyan-300 hover:bg-cyan-500/25 border border-cyan-500/40 transition-colors shadow-sm"
+                >
+                  <span>{link.label}</span>
+                  <ExternalLink className="w-3 h-3 text-cyan-400" />
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p className="text-[11px] text-slate-400 italic">
+              {story.evidenceNote || 'Bewijs volgt zodra deze story is afgerond.'}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {story.notes && (
+        <div className="mt-2 text-[10px] text-amber-300/90 italic font-mono">
+          {story.notes}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export const SprintsSection: React.FC = () => {
   const { sprints } = portfolioData;
@@ -209,10 +362,13 @@ export const SprintsSection: React.FC = () => {
                       <div>
                         <h4 className="text-sm font-bold text-white">Research Story</h4>
                         <span className="text-[11px] text-slate-300">
-                          {currentSprint.researchStories.stories.length}{' '}
-                          {currentSprint.researchStories.stories.length === 1
-                            ? 'story'
-                            : 'stories'}
+                          {currentSprint.researchStories.stories.length === 0
+                            ? 'Komt binnenkort'
+                            : `${currentSprint.researchStories.stories.length} ${
+                                currentSprint.researchStories.stories.length === 1
+                                  ? 'story'
+                                  : 'stories'
+                              }`}
                         </span>
                       </div>
                     </div>
@@ -220,51 +376,17 @@ export const SprintsSection: React.FC = () => {
 
                   {/* Stories list */}
                   <div className="space-y-4 mb-6">
-                    {currentSprint.researchStories.stories.map((story, i) => (
-                      <div key={i} className="p-3.5 rounded-2xl bg-[#08152B]/85 border border-[#1E3A68]">
-                        <p className="text-xs text-slate-200 leading-relaxed font-mono">
-                          <span className="text-indigo-400 font-bold">Als</span> {story.role},{' '}
-                          <span className="text-indigo-400 font-bold">wil ik</span> {story.goal},{' '}
-                          <span className="text-indigo-400 font-bold">zodat</span> {story.value}
+                    {currentSprint.researchStories.stories.length === 0 ? (
+                      <div className="p-4 rounded-2xl bg-[#08152B]/60 border border-dashed border-[#1E3A68] text-center">
+                        <p className="text-xs text-slate-400 italic">
+                          Komt binnenkort — Research stories voor Sprint {currentSprint.sprintNumber} worden geformuleerd bij de start van deze sprint.
                         </p>
-
-                        {/* Acceptance Criteria */}
-                        {story.acceptanceCriteria && story.acceptanceCriteria.length > 0 && (
-                          <div className="mt-3 pt-2.5 border-t border-[#1E3A68]/70 text-[11px] text-slate-300">
-                            <span className="font-semibold text-slate-200 flex items-center gap-1 mb-1">
-                              <ListChecks className="w-3 h-3 text-indigo-400" />
-                              Acceptatiecriteria:
-                            </span>
-                            <ul className="list-disc pl-4 space-y-0.5">
-                              {story.acceptanceCriteria.map((ac, idx) => (
-                                <li key={idx}>{ac}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        {/* Quality Criteria */}
-                        {story.qualityCriteria && story.qualityCriteria.length > 0 && (
-                          <div className="mt-3 pt-2.5 border-t border-[#1E3A68]/70 text-[11px] text-slate-300">
-                            <span className="font-semibold text-slate-200 flex items-center gap-1 mb-1">
-                              <Award className="w-3 h-3 text-indigo-400" />
-                              Kwaliteitscriteria:
-                            </span>
-                            <ul className="list-disc pl-4 space-y-0.5">
-                              {story.qualityCriteria.map((qc, idx) => (
-                                <li key={idx}>{qc}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        {story.notes && (
-                          <div className="mt-2 text-[10px] text-amber-300/90 italic font-mono">
-                            {story.notes}
-                          </div>
-                        )}
                       </div>
-                    ))}
+                    ) : (
+                      currentSprint.researchStories.stories.map((story, i) => (
+                        <StoryCardItem key={i} story={story} accent="indigo" />
+                      ))
+                    )}
                   </div>
                 </div>
 
@@ -299,10 +421,13 @@ export const SprintsSection: React.FC = () => {
                       <div>
                         <h4 className="text-sm font-bold text-white">User Story</h4>
                         <span className="text-[11px] text-slate-300">
-                          {currentSprint.userStories.stories.length}{' '}
-                          {currentSprint.userStories.stories.length === 1
-                            ? 'story'
-                            : 'stories'}
+                          {currentSprint.userStories.stories.length === 0
+                            ? 'Komt binnenkort'
+                            : `${currentSprint.userStories.stories.length} ${
+                                currentSprint.userStories.stories.length === 1
+                                  ? 'story'
+                                  : 'stories'
+                              }`}
                         </span>
                       </div>
                     </div>
@@ -310,51 +435,17 @@ export const SprintsSection: React.FC = () => {
 
                   {/* Stories list */}
                   <div className="space-y-4 mb-6">
-                    {currentSprint.userStories.stories.map((story, i) => (
-                      <div key={i} className="p-3.5 rounded-2xl bg-[#08152B]/85 border border-[#1E3A68]">
-                        <p className="text-xs text-slate-200 leading-relaxed font-mono">
-                          <span className="text-cyan-400 font-bold">Als</span> {story.role},{' '}
-                          <span className="text-cyan-400 font-bold">wil ik</span> {story.goal},{' '}
-                          <span className="text-cyan-400 font-bold">zodat</span> {story.value}
+                    {currentSprint.userStories.stories.length === 0 ? (
+                      <div className="p-4 rounded-2xl bg-[#08152B]/60 border border-dashed border-[#1E3A68] text-center">
+                        <p className="text-xs text-slate-400 italic">
+                          Komt binnenkort — User stories voor Sprint {currentSprint.sprintNumber} worden geformuleerd bij de start van deze sprint.
                         </p>
-
-                        {/* Acceptance Criteria */}
-                        {story.acceptanceCriteria && story.acceptanceCriteria.length > 0 && (
-                          <div className="mt-3 pt-2.5 border-t border-[#1E3A68]/70 text-[11px] text-slate-300">
-                            <span className="font-semibold text-slate-200 flex items-center gap-1 mb-1">
-                              <ListChecks className="w-3 h-3 text-cyan-400" />
-                              Acceptatiecriteria:
-                            </span>
-                            <ul className="list-disc pl-4 space-y-0.5">
-                              {story.acceptanceCriteria.map((ac, idx) => (
-                                <li key={idx}>{ac}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        {/* Quality Criteria */}
-                        {story.qualityCriteria && story.qualityCriteria.length > 0 && (
-                          <div className="mt-3 pt-2.5 border-t border-[#1E3A68]/70 text-[11px] text-slate-300">
-                            <span className="font-semibold text-slate-200 flex items-center gap-1 mb-1">
-                              <Award className="w-3 h-3 text-cyan-400" />
-                              Kwaliteitscriteria:
-                            </span>
-                            <ul className="list-disc pl-4 space-y-0.5">
-                              {story.qualityCriteria.map((qc, idx) => (
-                                <li key={idx}>{qc}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        {story.notes && (
-                          <div className="mt-2 text-[10px] text-amber-300/90 italic font-mono">
-                            {story.notes}
-                          </div>
-                        )}
                       </div>
-                    ))}
+                    ) : (
+                      currentSprint.userStories.stories.map((story, i) => (
+                        <StoryCardItem key={i} story={story} accent="cyan" />
+                      ))
+                    )}
                   </div>
                 </div>
 
@@ -389,10 +480,13 @@ export const SprintsSection: React.FC = () => {
                       <div>
                         <h4 className="text-sm font-bold text-white">Learning Story</h4>
                         <span className="text-[11px] text-slate-300">
-                          {currentSprint.learningStories.stories.length}{' '}
-                          {currentSprint.learningStories.stories.length === 1
-                            ? 'story'
-                            : 'stories'}
+                          {currentSprint.learningStories.stories.length === 0
+                            ? 'Komt binnenkort'
+                            : `${currentSprint.learningStories.stories.length} ${
+                                currentSprint.learningStories.stories.length === 1
+                                  ? 'story'
+                                  : 'stories'
+                              }`}
                         </span>
                       </div>
                     </div>
@@ -403,54 +497,12 @@ export const SprintsSection: React.FC = () => {
                     {currentSprint.learningStories.stories.length === 0 ? (
                       <div className="p-4 rounded-2xl bg-[#08152B]/60 border border-dashed border-[#1E3A68] text-center">
                         <p className="text-xs text-slate-400 italic">
-                          Learning story volgt binnenkort voor deze sprint.
+                          Komt binnenkort — Learning story voor Sprint {currentSprint.sprintNumber} wordt geformuleerd bij de start van deze sprint.
                         </p>
                       </div>
                     ) : (
                       currentSprint.learningStories.stories.map((story, i) => (
-                        <div key={i} className="p-3.5 rounded-2xl bg-[#08152B]/85 border border-[#1E3A68]">
-                          <p className="text-xs text-slate-200 leading-relaxed font-mono">
-                            <span className="text-amber-400 font-bold">Als</span> {story.role},{' '}
-                            <span className="text-amber-400 font-bold">wil ik</span> {story.goal},{' '}
-                            <span className="text-amber-400 font-bold">zodat</span> {story.value}
-                          </p>
-
-                          {/* Acceptance Criteria */}
-                          {story.acceptanceCriteria && story.acceptanceCriteria.length > 0 && (
-                            <div className="mt-3 pt-2.5 border-t border-[#1E3A68]/70 text-[11px] text-slate-300">
-                              <span className="font-semibold text-slate-200 flex items-center gap-1 mb-1">
-                                <ListChecks className="w-3 h-3 text-amber-400" />
-                                Acceptatiecriteria:
-                              </span>
-                              <ul className="list-disc pl-4 space-y-0.5">
-                                {story.acceptanceCriteria.map((ac, idx) => (
-                                  <li key={idx}>{ac}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-
-                          {/* Quality Criteria */}
-                          {story.qualityCriteria && story.qualityCriteria.length > 0 && (
-                            <div className="mt-3 pt-2.5 border-t border-[#1E3A68]/70 text-[11px] text-slate-300">
-                              <span className="font-semibold text-slate-200 flex items-center gap-1 mb-1">
-                                <Award className="w-3 h-3 text-amber-400" />
-                                Kwaliteitscriteria:
-                              </span>
-                              <ul className="list-disc pl-4 space-y-0.5">
-                                {story.qualityCriteria.map((qc, idx) => (
-                                  <li key={idx}>{qc}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-
-                          {story.notes && (
-                            <div className="mt-2 text-[10px] text-amber-300/90 italic font-mono">
-                              {story.notes}
-                            </div>
-                          )}
-                        </div>
+                        <StoryCardItem key={i} story={story} accent="amber" />
                       ))
                     )}
                   </div>

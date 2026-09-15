@@ -13,15 +13,22 @@ export type EvidenceFormat =
   | 'Document'
   | 'Notion Document';
 
+export interface EvidenceLink {
+  label: string;
+  url: string;
+}
+
 export interface EvidenceItem {
   id: string;
   title: string;
   storyType: StoryType;
-  format: EvidenceFormat;
+  format?: EvidenceFormat;
+  formats?: EvidenceFormat[];
   status: EvidenceStatus;
   dateOrSprint: string;
   summary: string;
   linkUrl?: string;
+  links?: EvidenceLink[];
   tag?: string;
 }
 
@@ -68,10 +75,15 @@ export interface ProjectItem {
   githubUrl?: string;
 }
 
+export type StoryStatus = 'Afgerond' | 'In uitvoering' | 'Nog te doen';
+
 export interface SprintStory {
   role: string;
   goal: string;
   value: string;
+  status?: StoryStatus;
+  evidenceLinks?: EvidenceLink[];
+  evidenceNote?: string;
   acceptanceCriteria?: string[];
   qualityCriteria?: string[];
   notes?: string;

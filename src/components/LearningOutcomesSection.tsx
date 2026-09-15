@@ -331,12 +331,24 @@ export const LearningOutcomesSection: React.FC = () => {
                         <div>
                           {/* Badges row */}
                           <div className="flex items-center justify-between gap-2 mb-3">
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-1.5">
                               {getStoryTypeBadge(item.storyType)}
-                              <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-300 bg-[#0A1A33] px-2 py-0.5 rounded-md border border-[#1E3A68]">
-                                {getFormatIcon(item.format)}
-                                {item.format}
-                              </span>
+                              {item.formats && item.formats.length > 0 ? (
+                                item.formats.map((fmt, fIdx) => (
+                                  <span
+                                    key={fIdx}
+                                    className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-300 bg-[#0A1A33] px-2 py-0.5 rounded-md border border-[#1E3A68]"
+                                  >
+                                    {getFormatIcon(fmt)}
+                                    {fmt}
+                                  </span>
+                                ))
+                              ) : item.format ? (
+                                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-300 bg-[#0A1A33] px-2 py-0.5 rounded-md border border-[#1E3A68]">
+                                  {getFormatIcon(item.format)}
+                                  {item.format}
+                                </span>
+                              ) : null}
                             </div>
                             <div>{getStatusBadge(item.status)}</div>
                           </div>
@@ -352,19 +364,34 @@ export const LearningOutcomesSection: React.FC = () => {
                           </p>
                         </div>
 
-                        {/* Bottom Meta & Link Button */}
-                        <div className="pt-3 border-t border-[#1E3A68]/70 flex items-center justify-between">
+                        {/* Bottom Meta & Link Buttons */}
+                        <div className="pt-3 border-t border-[#1E3A68]/70 flex flex-wrap items-center justify-between gap-2">
                           <span className="text-[11px] font-medium text-slate-300 flex items-center gap-1.5">
                             <Calendar className="w-3 h-3 text-cyan-400" />
                             {item.dateOrSprint}
                           </span>
 
-                          {item.linkUrl ? (
+                          {item.links && item.links.length > 0 ? (
+                            <div className="flex flex-wrap items-center gap-2">
+                              {item.links.map((link, lIdx) => (
+                                <a
+                                  key={lIdx}
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/15 text-cyan-300 hover:bg-cyan-500/25 border border-cyan-500/40 transition-colors shadow-sm"
+                                >
+                                  <span>{link.label}</span>
+                                  <ExternalLink className="w-3 h-3 text-cyan-400" />
+                                </a>
+                              ))}
+                            </div>
+                          ) : item.linkUrl ? (
                             <a
                               href={item.linkUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 border border-cyan-500/40 transition-colors"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/15 text-cyan-300 hover:bg-cyan-500/25 border border-cyan-500/40 transition-colors shadow-sm"
                             >
                               <span>Open Bewijsstuk</span>
                               <ExternalLink className="w-3 h-3" />
