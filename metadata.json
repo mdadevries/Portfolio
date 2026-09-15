@@ -1,0 +1,8 @@
+{
+  "name": "Portfolio Max • Minor Future-proof met AI!",
+  "description": "Persoonlijke portfolio-website van Max de Vries, student Technische Bedrijfskunde aan Hogeschool Utrecht voor de minor Future-proof met AI! (LU1 t/m LU5 bewijsstukken, sprints en onderzoek).",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
