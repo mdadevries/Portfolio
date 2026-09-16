@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   User,
-  Quote,
   Eye,
   Zap,
   Flame,
@@ -10,7 +9,6 @@ import {
   Workflow,
   Sparkles,
 } from 'lucide-react';
-import { motion } from 'motion/react';
 import { portfolioData } from '../data/portfolioData.ts';
 
 export const AboutSection: React.FC = () => {
@@ -38,8 +36,8 @@ export const AboutSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Bio + Quote + AI Vision Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+        {/* Bio + AI Vision Row */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-stretch">
           {/* Left 7 cols: Bio in cohesive paragraphs */}
           <div className="lg:col-span-7 flex flex-col justify-between space-y-6 bg-[#0F2447]/70 border border-[#1E3A68]/90 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl shadow-black/20">
             <div className="space-y-4 text-slate-200 leading-relaxed text-sm sm:text-base">
@@ -67,40 +65,37 @@ export const AboutSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right 5 cols: Quote + AI Vision Box */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            {/* Quote Card */}
-            <div className="rounded-3xl bg-gradient-to-br from-[#122549] via-[#0F2447] to-[#0A1A33] border border-indigo-500/25 p-6 sm:p-7 relative overflow-hidden backdrop-blur-md shadow-xl shadow-black/20">
-              <Quote className="w-8 h-8 text-indigo-400/40 mb-3" />
-              <blockquote className="text-base sm:text-lg font-medium text-white italic leading-snug mb-4">
-                {about.quote}
-              </blockquote>
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-indigo-500/25 text-indigo-300 flex items-center justify-center font-bold text-xs border border-indigo-500/40 shadow-sm">
-                  {student.initials}
+          {/* Right 5 cols: AI Vision Box */}
+          <div className="lg:col-span-5 flex flex-col justify-between rounded-3xl bg-[#0F2447]/70 border border-cyan-500/25 p-6 sm:p-8 backdrop-blur-md shadow-xl shadow-black/20">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center border border-cyan-500/30 shadow-sm">
+                  <Eye className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-white">{student.fullName}</div>
-                  <div className="text-[11px] text-slate-300">
-                    Persoonlijk motto • minor 2026
-                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                    Mijn Visie op AI
+                  </h3>
+                  <span className="text-xs text-cyan-300/80 font-medium">
+                    Procesbeheersing & menselijke controle
+                  </span>
                 </div>
               </div>
-            </div>
-
-            {/* AI Vision Card */}
-            <div className="rounded-3xl bg-[#0F2447]/70 border border-cyan-500/25 p-6 sm:p-7 backdrop-blur-md shadow-xl shadow-black/20">
-              <div className="flex items-center gap-2.5 mb-3">
-                <div className="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center border border-cyan-500/30">
-                  <Eye className="w-4 h-4" />
-                </div>
-                <h3 className="text-sm font-bold text-white tracking-tight">
-                  Mijn Visie op AI
-                </h3>
-              </div>
-              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                 {about.aiVision}
               </p>
+            </div>
+
+            <div className="pt-6 mt-6 border-t border-[#1E3A68]/70 flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs border border-cyan-500/30 shadow-sm">
+                {student.initials}
+              </div>
+              <div>
+                <div className="text-xs font-bold text-white">{student.fullName}</div>
+                <div className="text-[11px] text-slate-300">
+                  {student.study} • {student.institution}
+                </div>
+              </div>
             </div>
           </div>
         </div>

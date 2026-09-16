@@ -4,13 +4,39 @@ import { PortfolioData, EvidenceLink } from '../types.ts';
 export const SHARED_EVIDENCE = {
   researchKerntaken: {
     links: [
-      { label: 'Bekijk Presentatie', url: '[MAX: link invullen]' },
-      { label: 'Bekijk Document', url: '[MAX: link invullen]' },
+      {
+        label: 'Bekijk Presentatie',
+        url: 'https://hogeschoolutrecht-my.sharepoint.com/:p:/g/personal/max_devries1_student_hu_nl/IQCLzAuBsm9QQoLSM1-tKS5mAZtxUa4urI3CF-iwHw1C6tU?e=1yjxzs',
+      },
+      {
+        label: 'Bekijk Document',
+        url: 'https://hogeschoolutrecht-my.sharepoint.com/:w:/g/personal/max_devries1_student_hu_nl/IQCfpY17tNm4TLKLtf4SnbNhAXD8ZHUUj2Dh3Ph-j23SyZ4?e=iQjCwJ',
+      },
+    ] as EvidenceLink[],
+  },
+  researchN8nPowerAutomate: {
+    links: [
+      {
+        label: 'Bekijk Presentatie',
+        url: 'https://hogeschoolutrecht-my.sharepoint.com/:p:/g/personal/max_devries1_student_hu_nl/IQChEC5EHR3YQ4h9uPf490bYAbuCwueDB-nBHX40dtQU4nw?e=YmtidG',
+      },
+      {
+        label: 'Bekijk Document',
+        url: 'https://hogeschoolutrecht-my.sharepoint.com/:w:/g/personal/max_devries1_student_hu_nl/IQC68hlHdfM8RJwsudXRWMmfAV4Bbm43kWXcrkdi-h63mLU?e=H03E7M',
+      },
     ] as EvidenceLink[],
   },
   userPortfolioSite: {
     links: [
       { label: 'Bekijk Live Website', url: '/' },
+    ] as EvidenceLink[],
+  },
+  userPromptSjabloon: {
+    links: [
+      {
+        label: 'Bekijk Document',
+        url: 'https://hogeschoolutrecht-my.sharepoint.com/:w:/g/personal/max_devries1_student_hu_nl/IQBA3Wf8Y6eORbl82LoGoOWuAR24pm0qf0vRKYZH1UYG53s?e=pE0iHh',
+      },
     ] as EvidenceLink[],
   },
 };
@@ -48,7 +74,7 @@ export const portfolioData: PortfolioData = {
     quote:
       '“Echte procesinnovatie ontstaat niet door simpelweg AI aan te zetten, maar door de mens, data en besluitvorming doelgericht opnieuw met elkaar te verbinden.”',
     aiVision:
-      'Mijn visie op AI binnen procesmanagement: AI fungeert als intelligente copilot voor de procesmanager en operationele teams. Door ongestructureerde datastromen direct om te zetten in bruikbare stuurinformatie en routinematige validaties over te nemen, kunnen bedrijfskundigen zich richten op strategische procesverbetering, uitzonderingsbehandeling en duurzame innovatie. Verantwoordelijkheid, transparantie en menselijke controle blijven hierbij altijd het vertrekpunt.',
+      'AI is voor mij een soort digitale assistent voor de procesmanager. Het kan rommelige data omzetten in duidelijke informatie en simpele controles automatisch uitvoeren. Daardoor krijgen mensen meer tijd voor de dingen die er echt toe doen: processen verbeteren en slimme keuzes maken. Wel moet er altijd iemand verantwoordelijk blijven en moet duidelijk zijn hoe en waarom AI iets doet.',
     talents: [
       {
         title: 'Procesontleding & Modellering',
@@ -133,14 +159,16 @@ export const portfolioData: PortfolioData = {
         },
         {
           id: 'ev-lu1-2',
-          title: 'Voorbeeld: Expert-interview met Hoofd Bedrijfsvoering',
+          title: 'Onderzoek: AI-functionaliteiten in n8n & Power Automate',
           storyType: 'Research',
           format: 'Document',
-          status: 'Binnenkort',
-          dateOrSprint: 'Sprint 3',
+          formats: ['Presentatie', 'Document'],
+          status: 'Afgerond',
+          dateOrSprint: 'Sprint 1',
           summary:
-            'Diepte-interview over adoptiebarrières en governance van generatieve AI-tools op de werkvloer.',
-          tag: 'Veldonderzoek',
+            'Deskresearch naar de beschikbare AI-functionaliteiten binnen n8n en Microsoft Power Automate, inclusief processtap-analyse en vergelijkende conclusie.',
+          links: SHARED_EVIDENCE.researchN8nPowerAutomate.links,
+          tag: 'Deskresearch',
         },
       ],
     },
@@ -402,8 +430,8 @@ export const portfolioData: PortfolioData = {
             role: 'student Technische Bedrijfskunde',
             goal: 'via deskresearch onderzoeken welke AI-functionaliteiten beschikbaar zijn binnen n8n en Power Automate',
             value: 'ik onderbouwd kan bepalen hoe ik deze tools in de toekomst effectiever kan inzetten.',
-            status: 'Nog te doen',
-            evidenceNote: 'Bewijs volgt zodra deze story is afgerond.',
+            status: 'Afgerond',
+            evidenceLinks: SHARED_EVIDENCE.researchN8nPowerAutomate.links,
             acceptanceCriteria: [
               'Voor beide tools is onderzocht welke AI-functionaliteiten beschikbaar zijn',
               'Per functionaliteit is beschreven welk type processtap hiermee geautomatiseerd of verbeterd kan worden',
@@ -441,8 +469,8 @@ export const portfolioData: PortfolioData = {
             role: 'procesmanager',
             goal: 'een herbruikbaar promptsjabloon ontwikkelen waarmee ik AI kan inzetten om processen te analyseren',
             value: 'ik dit sjabloon in latere sprints steeds opnieuw kan gebruiken.',
-            status: 'Nog te doen',
-            evidenceNote: 'Bewijs volgt zodra deze story is afgerond.',
+            status: 'Afgerond',
+            evidenceLinks: SHARED_EVIDENCE.userPromptSjabloon.links,
             acceptanceCriteria: [
               'Er is een werkend promptsjabloon dat AI vraagt om een proces te analyseren (stappen, knelpunten, verbeterpunten)',
               'Het sjabloon is minimaal 1 keer getest op een voorbeeldproces',
