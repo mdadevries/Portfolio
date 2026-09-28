@@ -29,7 +29,7 @@ export const AboutSection: React.FC = () => {
             <span>Persoonlijk Profiel</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-[rgb(var(--text-primary))] tracking-tight mb-4">
-            Over Max & Zijn Drijfveren
+            Over Max
           </h2>
           <p className="text-[rgb(var(--text-tertiary))] text-base sm:text-lg leading-relaxed">
             Als student Technische Bedrijfskunde aan de Hogeschool Utrecht combineer ik procesmatige

@@ -20,10 +20,53 @@ import { SprintData, SprintStory, StoryStatus } from '../types.ts';
 interface StoryCardItemProps {
   story: SprintStory;
   accent: 'indigo' | 'cyan' | 'amber';
+  /** Unieke sleutel (sprint + type + index) om de handmatige status per story te onthouden */
+  storyKey: string;
 }
 
-const StoryCardItem: React.FC<StoryCardItemProps> = ({ story, accent }) => {
+const STORY_STATUS_OPTIONS: StoryStatus[] = ['Nog te doen', 'In uitvoering', 'Afgerond'];
+
+const STORY_STATUS_STYLES: Record<StoryStatus, string> = {
+  Afgerond: 'bg-emerald-500/15 border-emerald-500/30 text-emerald-700 dark:text-emerald-300',
+  'In uitvoering': 'bg-cyan-500/15 border-cyan-500/30 text-cyan-700 dark:text-cyan-300',
+  'Nog te doen': 'bg-[rgb(var(--bg))] border-[rgb(var(--border))] text-[rgb(var(--text-tertiary))]',
+};
+
+const STORY_STATUS_OVERRIDES_KEY = 'storyStatusOverrides';
+
+const readStatusOverride = (key: string): StoryStatus | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(STORY_STATUS_OVERRIDES_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Record<string, StoryStatus>;
+    return parsed[key] ?? null;
+  } catch {
+    return null;
+  }
+};
+
+const writeStatusOverride = (key: string, status: StoryStatus) => {
+  try {
+    const raw = localStorage.getItem(STORY_STATUS_OVERRIDES_KEY);
+    const parsed = raw ? (JSON.parse(raw) as Record<string, StoryStatus>) : {};
+    parsed[key] = status;
+    localStorage.setItem(STORY_STATUS_OVERRIDES_KEY, JSON.stringify(parsed));
+  } catch {
+    // localStorage niet beschikbaar — status blijft wel gelden voor deze sessie
+  }
+};
+
+const StoryCardItem: React.FC<StoryCardItemProps> = ({ story, accent, storyKey }) => {
   const [isCriteriaOpen, setIsCriteriaOpen] = useState(false);
+  const [status, setStatus] = useState<StoryStatus>(
+    () => readStatusOverride(storyKey) || story.status || 'Nog te doen'
+  );
+
+  const handleStatusChange = (newStatus: StoryStatus) => {
+    setStatus(newStatus);
+    writeStatusOverride(storyKey, newStatus);
+  };
 
   const roleColorClass =
     accent === 'indigo'
@@ -37,32 +80,11 @@ const StoryCardItem: React.FC<StoryCardItemProps> = ({ story, accent }) => {
       (story.qualityCriteria && story.qualityCriteria.length > 0)
   );
 
-  const getStoryStatusBadge = (status?: StoryStatus) => {
-    switch (status) {
-      case 'Afgerond':
-        return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300">
-            <CheckCircle2 className="w-3 h-3 text-emerald-700 dark:text-emerald-400" />
-            Afgerond
-          </span>
-        );
-      case 'In uitvoering':
-        return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-cyan-500/15 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300">
-            <Clock className="w-3 h-3 text-cyan-700 dark:text-cyan-400" />
-            In uitvoering
-          </span>
-        );
-      case 'Nog te doen':
-      default:
-        return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[rgb(var(--bg))] border border-[rgb(var(--border))] text-[rgb(var(--text-tertiary))]">
-            <CircleDashed className="w-3 h-3 text-[rgb(var(--text-muted))]" />
-            Nog te doen
-          </span>
-        );
-    }
-  };
+  const statusIcon = {
+    Afgerond: <CheckCircle2 className="w-3 h-3 shrink-0" />,
+    'In uitvoering': <Clock className="w-3 h-3 shrink-0" />,
+    'Nog te doen': <CircleDashed className="w-3 h-3 shrink-0" />,
+  }[status];
 
   return (
     <div className="p-3.5 rounded-2xl bg-[rgb(var(--surface-sunken))]/85 border border-[rgb(var(--border))]">
@@ -130,7 +152,27 @@ const StoryCardItem: React.FC<StoryCardItemProps> = ({ story, accent }) => {
       <div className="mt-3.5 pt-3 border-t border-[rgb(var(--border))]/70 flex flex-col gap-2">
         <div className="flex items-center justify-between gap-2">
           <span className="text-[11px] font-semibold text-[rgb(var(--text-tertiary))]">Status:</span>
-          {getStoryStatusBadge(story.status || 'Nog te doen')}
+          <div
+            className={`inline-flex items-center gap-1 pl-2 pr-1.5 py-0.5 rounded-full text-[11px] font-semibold border ${STORY_STATUS_STYLES[status]}`}
+          >
+            {statusIcon}
+            <select
+              value={status}
+              onChange={(e) => handleStatusChange(e.target.value as StoryStatus)}
+              aria-label="Status van deze story aanpassen"
+              className="bg-transparent border-none outline-none text-[11px] font-semibold cursor-pointer appearance-none pr-1"
+            >
+              {STORY_STATUS_OPTIONS.map((option) => (
+                <option
+                  key={option}
+                  value={option}
+                  className="bg-[rgb(var(--surface))] text-[rgb(var(--text-primary))]"
+                >
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div className="pt-1 flex flex-col gap-1.5">
@@ -384,7 +426,12 @@ export const SprintsSection: React.FC = () => {
                       </div>
                     ) : (
                       currentSprint.researchStories.stories.map((story, i) => (
-                        <StoryCardItem key={i} story={story} accent="indigo" />
+                        <StoryCardItem
+                          key={i}
+                          story={story}
+                          accent="indigo"
+                          storyKey={`sprint-${currentSprint.sprintNumber}-research-${i}`}
+                        />
                       ))
                     )}
                   </div>
@@ -443,7 +490,12 @@ export const SprintsSection: React.FC = () => {
                       </div>
                     ) : (
                       currentSprint.userStories.stories.map((story, i) => (
-                        <StoryCardItem key={i} story={story} accent="cyan" />
+                        <StoryCardItem
+                          key={i}
+                          story={story}
+                          accent="cyan"
+                          storyKey={`sprint-${currentSprint.sprintNumber}-user-${i}`}
+                        />
                       ))
                     )}
                   </div>
@@ -502,7 +554,12 @@ export const SprintsSection: React.FC = () => {
                       </div>
                     ) : (
                       currentSprint.learningStories.stories.map((story, i) => (
-                        <StoryCardItem key={i} story={story} accent="amber" />
+                        <StoryCardItem
+                          key={i}
+                          story={story}
+                          accent="amber"
+                          storyKey={`sprint-${currentSprint.sprintNumber}-learning-${i}`}
+                        />
                       ))
                     )}
                   </div>

@@ -28,9 +28,6 @@ export default function App() {
         {/* 2. Hero Section (bevat de enige H1) */}
         <HeroSection />
 
-        {/* 2b. Scrum-methodiek, los van de hero voor een rustig eerste scherm */}
-        <MethodologySection />
-
         {/* 3. Over mij (#over-mij) */}
         <AboutSection />
 
@@ -42,6 +39,9 @@ export default function App() {
 
         {/* 6. Projecten (#projecten) */}
         <ProjectsSection />
+
+        {/* 6b. Scrum-methodiek, direct als introductie op de sprint-tijdlijn */}
+        <MethodologySection />
 
         {/* 7. Sprint-overzicht (#sprints) */}
         <SprintsSection />
