@@ -134,6 +134,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     res.status(200).json({ reply });
   } catch (err) {
-    res.status(500).json({ error: 'Er ging iets mis bij het genereren van een antwoord.' });
+    // Foutdetail meesturen (tijdelijk, voor debugging) zodat de echte oorzaak
+    // zichtbaar is in de Network-tab i.p.v. alleen in de Vercel-logs.
+    const details = err instanceof Error ? err.message : String(err);
+    console.error('Gemini generateContent fout:', details);
+    res.status(500).json({ error: 'Er ging iets mis bij het genereren van een antwoord.', details });
   }
 }

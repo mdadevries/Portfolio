@@ -63,13 +63,17 @@ export const ChatWidget: React.FC = () => {
       const data = await res.json().catch(() => null);
 
       if (!res.ok || !data?.reply) {
-        throw new Error(data?.error || 'Er ging iets mis.');
+        throw new Error(data?.details || data?.error || 'Er ging iets mis.');
       }
 
       setMessages((prev) => [...prev, { role: 'model', text: data.reply }]);
     } catch (err) {
+      // TODO: zodra de chatbot stabiel werkt, dit terugzetten naar alleen de
+      // vriendelijke tekst zonder technische details.
+      const rawDetail = err instanceof Error ? err.message : null;
       setError(
-        'Sorry, de chatbot reageert nu niet. Probeer het zo nog eens, of ga naar de contactsectie.'
+        'Sorry, de chatbot reageert nu niet. Probeer het zo nog eens, of ga naar de contactsectie.' +
+          (rawDetail ? ` (detail: ${rawDetail})` : '')
       );
     } finally {
       setIsLoading(false);
