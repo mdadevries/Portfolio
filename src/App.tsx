@@ -9,6 +9,7 @@ import { ProjectsSection } from './components/ProjectsSection.tsx';
 import { SprintsSection } from './components/SprintsSection.tsx';
 import { ContactSection } from './components/ContactSection.tsx';
 import { Footer } from './components/Footer.tsx';
+import { ChatWidget } from './components/ChatWidget.tsx';
 
 export default function App() {
   return (
@@ -52,6 +53,9 @@ export default function App() {
 
       {/* 9. Footer */}
       <Footer />
+
+      {/* Zwevende AI-chatbot, overal op de site beschikbaar */}
+      <ChatWidget />
     </div>
   );
 }
