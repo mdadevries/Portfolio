@@ -10,26 +10,28 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData.ts';
+import { SmartImage } from './SmartImage.tsx';
+import { renderWithBold } from '../utils/renderWithBold.tsx';
 
 export const AboutSection: React.FC = () => {
-  const { about, student } = portfolioData;
+  const { about, student, hero } = portfolioData;
 
   return (
     <section
       id="over-mij"
-      className="py-20 md:py-28 relative border-t border-[#162D50] bg-[#08152B]/40 overflow-hidden"
+      className="py-20 md:py-28 relative border-t border-[rgb(var(--border-subtle))] bg-[rgb(var(--surface-sunken))]/40 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#0F2447] border border-[#1E3A68] text-slate-200 mb-4 shadow-sm">
-            <User className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[rgb(var(--surface))] border border-[rgb(var(--border))] text-[rgb(var(--text-secondary))] mb-4 shadow-sm">
+            <User className="w-3.5 h-3.5 text-cyan-700 dark:text-cyan-400" />
             <span>Persoonlijk Profiel</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[rgb(var(--text-primary))] tracking-tight mb-4">
             Over Max & Zijn Drijfveren
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+          <p className="text-[rgb(var(--text-tertiary))] text-base sm:text-lg leading-relaxed">
             Als student Technische Bedrijfskunde aan de Hogeschool Utrecht combineer ik procesmatige
             scherpte met praktische automatisering. Hieronder lees je meer over mijn achtergrond,
             filosofie en ambities.
@@ -39,60 +41,67 @@ export const AboutSection: React.FC = () => {
         {/* Bio + AI Vision Row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-stretch">
           {/* Left 7 cols: Bio in cohesive paragraphs */}
-          <div className="lg:col-span-7 flex flex-col justify-between space-y-6 bg-[#0F2447]/70 border border-[#1E3A68]/90 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl shadow-black/20">
-            <div className="space-y-4 text-slate-200 leading-relaxed text-sm sm:text-base">
+          <div className="lg:col-span-7 flex flex-col justify-between space-y-6 bg-[rgb(var(--surface))]/70 border border-[rgb(var(--border))]/90 rounded-3xl p-6 sm:p-8 backdrop-blur-md shadow-xl shadow-black/20">
+            <div className="space-y-4 text-[rgb(var(--text-secondary))] leading-relaxed text-sm sm:text-base max-w-[70ch]">
               {about.bioParagraphs.map((paragraph, idx) => (
                 <p key={idx} className="leading-relaxed">
-                  {paragraph}
+                  {renderWithBold(paragraph)}
                 </p>
               ))}
             </div>
 
             {/* Quick Experience Pills */}
-            <div className="pt-4 border-t border-[#1E3A68]/70 flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-[#0A1A33]/90 text-cyan-300 border border-[#1E3A68]">
-                <Workflow className="w-3 h-3 text-cyan-400" />
+            <div className="pt-4 border-t border-[rgb(var(--border))]/70 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-[rgb(var(--bg))]/90 text-cyan-700 dark:text-cyan-300 border border-[rgb(var(--border))]">
+                <Workflow className="w-3 h-3 text-cyan-700 dark:text-cyan-400" />
                 Microsoft Power Automate
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-[#0A1A33]/90 text-indigo-300 border border-[#1E3A68]">
-                <Zap className="w-3 h-3 text-indigo-400" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-[rgb(var(--bg))]/90 text-indigo-700 dark:text-indigo-300 border border-[rgb(var(--border))]">
+                <Zap className="w-3 h-3 text-indigo-700 dark:text-indigo-400" />
                 n8n Automation Workflows
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-[#0A1A33]/90 text-emerald-300 border border-[#1E3A68]">
-                <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-[rgb(var(--bg))]/90 text-emerald-700 dark:text-emerald-300 border border-[rgb(var(--border))]">
+                <CheckCircle2 className="w-3 h-3 text-emerald-700 dark:text-emerald-400" />
                 Lean & BPMN Procesmodellering
               </span>
             </div>
           </div>
 
           {/* Right 5 cols: AI Vision Box */}
-          <div className="lg:col-span-5 flex flex-col justify-between rounded-3xl bg-[#0F2447]/70 border border-cyan-500/25 p-6 sm:p-8 backdrop-blur-md shadow-xl shadow-black/20">
+          <div className="lg:col-span-5 flex flex-col justify-between rounded-3xl bg-[rgb(var(--surface))]/70 border border-cyan-500/25 p-6 sm:p-8 backdrop-blur-md shadow-xl shadow-black/20">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center border border-cyan-500/30 shadow-sm">
+                <div className="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 flex items-center justify-center border border-cyan-500/30 shadow-sm">
                   <Eye className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                  <h3 className="text-base sm:text-lg font-bold text-[rgb(var(--text-primary))] tracking-tight">
                     Mijn Visie op AI
                   </h3>
-                  <span className="text-xs text-cyan-300/80 font-medium">
+                  <span className="text-xs text-cyan-700 dark:text-cyan-300/80 font-medium">
                     Procesbeheersing & menselijke controle
                   </span>
                 </div>
               </div>
-              <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
+              <p className="text-sm sm:text-base text-[rgb(var(--text-secondary))] leading-relaxed">
                 {about.aiVision}
               </p>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-[#1E3A68]/70 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs border border-cyan-500/30 shadow-sm">
-                {student.initials}
-              </div>
+            <div className="pt-6 mt-6 border-t border-[rgb(var(--border))]/70 flex items-center gap-3">
+              <SmartImage
+                src={hero.profileImage}
+                alt={hero.profileImageAlt || `Portretfoto van ${student.fullName}`}
+                aspect="aspect-square"
+                rounded="rounded-full"
+                fallbackLabel={student.initials}
+                labelSize="text-[11px]"
+                showCaption={false}
+                className="w-9 h-9 border border-cyan-500/30 shadow-sm shrink-0"
+              />
               <div>
-                <div className="text-xs font-bold text-white">{student.fullName}</div>
-                <div className="text-[11px] text-slate-300">
+                <div className="text-xs font-bold text-[rgb(var(--text-primary))]">{student.fullName}</div>
+                <div className="text-[11px] text-[rgb(var(--text-tertiary))]">
                   {student.study} • {student.institution}
                 </div>
               </div>
@@ -103,16 +112,16 @@ export const AboutSection: React.FC = () => {
         {/* 3 Pillars: Talenten, Passies & Dromen */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* 1. Talenten & Kwaliteiten */}
-          <div className="rounded-3xl bg-[#0F2447]/60 border border-[#1E3A68]/80 p-6 sm:p-7 hover:border-indigo-500/40 transition-all shadow-lg shadow-black/15">
+          <div className="rounded-3xl bg-[rgb(var(--surface))]/60 border border-[rgb(var(--border))]/80 p-6 sm:p-7 hover:border-indigo-500/40 transition-all shadow-lg shadow-black/15">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center border border-indigo-500/30">
+              <div className="w-10 h-10 rounded-full bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 flex items-center justify-center border border-indigo-500/30">
                 <Zap className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">
+                <h3 className="text-base font-bold text-[rgb(var(--text-primary))]">
                   Talenten & Kwaliteiten
                 </h3>
-                <span className="text-xs text-slate-300">Sterktes in het werkveld</span>
+                <span className="text-xs text-[rgb(var(--text-tertiary))]">Sterktes in het werkveld</span>
               </div>
             </div>
 
@@ -120,14 +129,14 @@ export const AboutSection: React.FC = () => {
               {about.talents.map((talent, i) => (
                 <div key={i} className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-bold text-slate-100">
+                    <h4 className="text-xs font-bold text-[rgb(var(--text-primary))]">
                       {talent.title}
                     </h4>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#0A1A33] text-indigo-300 border border-[#1E3A68]">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgb(var(--bg))] text-indigo-700 dark:text-indigo-300 border border-[rgb(var(--border))]">
                       {talent.tag}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-[rgb(var(--text-tertiary))] leading-relaxed">
                     {talent.description}
                   </p>
                 </div>
@@ -136,16 +145,16 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* 2. Passies & Energie */}
-          <div className="rounded-3xl bg-[#0F2447]/60 border border-[#1E3A68]/80 p-6 sm:p-7 hover:border-cyan-500/40 transition-all shadow-lg shadow-black/15">
+          <div className="rounded-3xl bg-[rgb(var(--surface))]/60 border border-[rgb(var(--border))]/80 p-6 sm:p-7 hover:border-cyan-500/40 transition-all shadow-lg shadow-black/15">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center border border-cyan-500/30">
+              <div className="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-700 dark:text-cyan-400 flex items-center justify-center border border-cyan-500/30">
                 <Flame className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">
+                <h3 className="text-base font-bold text-[rgb(var(--text-primary))]">
                   Passies & Energie
                 </h3>
-                <span className="text-xs text-slate-300">Wat mij motiveert</span>
+                <span className="text-xs text-[rgb(var(--text-tertiary))]">Wat mij motiveert</span>
               </div>
             </div>
 
@@ -153,14 +162,14 @@ export const AboutSection: React.FC = () => {
               {about.passions.map((passion, i) => (
                 <div key={i} className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-bold text-slate-100">
+                    <h4 className="text-xs font-bold text-[rgb(var(--text-primary))]">
                       {passion.title}
                     </h4>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#0A1A33] text-cyan-300 border border-[#1E3A68]">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgb(var(--bg))] text-cyan-700 dark:text-cyan-300 border border-[rgb(var(--border))]">
                       {passion.tag}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-[rgb(var(--text-tertiary))] leading-relaxed">
                     {passion.description}
                   </p>
                 </div>
@@ -169,29 +178,29 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* 3. Dromen & Ambities */}
-          <div className="rounded-3xl bg-[#0F2447]/60 border border-[#1E3A68]/80 p-6 sm:p-7 hover:border-emerald-500/40 transition-all flex flex-col justify-between shadow-lg shadow-black/15">
+          <div className="rounded-3xl bg-[rgb(var(--surface))]/60 border border-[rgb(var(--border))]/80 p-6 sm:p-7 hover:border-emerald-500/40 transition-all flex flex-col justify-between shadow-lg shadow-black/15">
             <div>
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+                <div className="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/30">
                   <Compass className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-white">
+                  <h3 className="text-base font-bold text-[rgb(var(--text-primary))]">
                     {about.ambitions.title}
                   </h3>
-                  <span className="text-xs text-emerald-400 font-semibold">
+                  <span className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold">
                     Doelrol: {about.ambitions.targetRole}
                   </span>
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed mb-4">
+              <p className="text-xs sm:text-sm text-[rgb(var(--text-secondary))] leading-relaxed mb-4">
                 {about.ambitions.description}
               </p>
             </div>
 
-            <div className="p-3 rounded-2xl bg-[#0A1A33]/80 border border-[#1E3A68]/80 text-[11px] text-slate-300 flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <div className="p-3 rounded-2xl bg-[rgb(var(--bg))]/80 border border-[rgb(var(--border))]/80 text-[11px] text-[rgb(var(--text-tertiary))] flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400 shrink-0" />
               <span>Gefocust op AI-augmented business operations na 2026</span>
             </div>
           </div>

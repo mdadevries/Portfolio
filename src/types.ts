@@ -30,6 +30,8 @@ export interface EvidenceItem {
   linkUrl?: string;
   links?: EvidenceLink[];
   tag?: string;
+  image?: string;
+  imageAlt?: string;
 }
 
 export interface LearningOutcome {
@@ -61,6 +63,8 @@ export interface ResearchPlan {
   expectedOutcome: string;
   publicationDate: string;
   reportUrl?: string;
+  diagramImage?: string;
+  diagramImageAlt?: string;
 }
 
 export interface ProjectItem {
@@ -73,6 +77,8 @@ export interface ProjectItem {
   techStack: string[];
   demoUrl?: string;
   githubUrl?: string;
+  image?: string;
+  imageAlt?: string;
 }
 
 export type StoryStatus = 'Afgerond' | 'In uitvoering' | 'Nog te doen';
@@ -164,6 +170,8 @@ export interface PortfolioData {
     title: string;
     subtitle: string;
     tags: string[];
+    profileImage?: string;
+    profileImageAlt?: string;
   };
   about: AboutData;
   learningOutcomes: LearningOutcome[];

@@ -53,23 +53,20 @@ export const portfolioData: PortfolioData = {
   },
 
   hero: {
-    eyebrow: 'Hogeschool Utrecht • Minor Future-proof met AI! (2026)',
+    eyebrow: 'Hogeschool Utrecht • Minor Futureproof met AI! (2026)',
     title: 'AI in Procesmanagement: Onderzoeken, Bouwen & Verantwoorden',
     subtitle:
-      'Welkom op mijn centrale portfolio. Als vierdejaars student Technische Bedrijfskunde onderzoek en ontwikkel ik gedurende 20 intensieve weken hoe generatieve en agentische AI bedrijfsprocessen kan transformeren — getoetst aan de 5 officiële leeruitkomsten (LU1 t/m LU5).',
-    tags: [
-      'Technische Bedrijfskunde',
-      '20 Weken',
-      '8 Sprints',
-      'Research, User & Learning Stories',
-    ],
+      'Welkom op mijn centrale portfolio. Als student Technische Bedrijfskunde onderzoek en ontwikkel ik gedurende 16 intensieve weken hoe generatieve en agentische AI bedrijfsprocessen kan transformeren — getoetst aan de 5 officiële leeruitkomsten (LU1 t/m LU5).',
+    tags: ['Technische Bedrijfskunde', '8 sprints · 16 weken'],
+    profileImage: '/images/max.jpg',
+    profileImageAlt: 'Portretfoto van Max de Vries',
   },
 
   about: {
     bioParagraphs: [
       'Hoi! Ik ben Max de Vries, student Technische Bedrijfskunde aan de Hogeschool Utrecht. Vanuit mijn studie heb ik een sterke fascinatie voor procesoptimalisatie, ketensamenwerking en datagedreven besluitvorming. Eerder heb ik al praktische ervaring opgedaan met het automatiseren van repeterende workflows met tools zoals Microsoft Power Automate en n8n.',
-      'Tijdens mijn stage heb ik waardevolle praktijkervaring opgedaan met procesoptimalisatie, ook specifiek met AI: ik heb gewerkt aan het bouwen én inzetten van AI-agents om processen te automatiseren.',
-      'Die stage-ervaring met agents sluit direct aan op wat ik nu binnen de minor "Future-proof met AI!" verder onderzoek en bouw. Binnen het 20-weken durende traject richt ik me op het overbruggen van de kloof tussen theoretische AI-mogelijkheden en daadwerkelijke operationele proceswaarde — van methodische verantwoording en ethische randvoorwaarden tot robuuste, werkende proof-of-concepts.',
+      'Tijdens mijn stage heb ik waardevolle praktijkervaring opgedaan met procesoptimalisatie, ook specifiek met AI: ik heb gewerkt aan het **bouwen én inzetten van AI-agents** om processen te automatiseren.',
+      'Die ervaring sluit direct aan op de minor "Futureproof met AI!". In 16 weken overbrug ik de kloof tussen theoretische AI-mogelijkheden en operationele proceswaarde — van methodische verantwoording tot werkende proof-of-concepts.',
     ],
     quote:
       '“Echte procesinnovatie ontstaat niet door simpelweg AI aan te zetten, maar door de mens, data en besluitvorming doelgericht opnieuw met elkaar te verbinden.”',
@@ -133,7 +130,7 @@ export const portfolioData: PortfolioData = {
         'Onderzoeken hoe AI het domein van Technische Bedrijfskunde en procesmanagement transformeert, inclusief kansen, risico’s en veranderende rollen.',
       badgeColor: {
         bg: 'bg-indigo-500/10',
-        text: 'text-indigo-400',
+        text: 'text-indigo-700 dark:text-indigo-400',
         border: 'border-indigo-500/30',
         glow: 'group-hover:shadow-indigo-500/10',
       },
@@ -156,6 +153,8 @@ export const portfolioData: PortfolioData = {
             'Grondig deskresearch naar de impact van generatieve en agentische AI op de kerntaken, competenties en operationele verantwoordelijkheden van de moderne procesmanager.',
           links: SHARED_EVIDENCE.researchKerntaken.links,
           tag: 'Deskresearch',
+          image: '/images/bewijs/lu1-kerntaken-procesmanager.webp',
+          imageAlt: 'Eerste slide van de presentatie over veranderende kerntaken van de procesmanager',
         },
         {
           id: 'ev-lu1-2',
@@ -169,6 +168,8 @@ export const portfolioData: PortfolioData = {
             'Deskresearch naar de beschikbare AI-functionaliteiten binnen n8n en Microsoft Power Automate, inclusief processtap-analyse en vergelijkende conclusie.',
           links: SHARED_EVIDENCE.researchN8nPowerAutomate.links,
           tag: 'Deskresearch',
+          image: '/images/bewijs/lu1-ai-n8n-power-automate.webp',
+          imageAlt: 'Eerste slide van de presentatie over AI-functionaliteiten in n8n en Power Automate',
         },
       ],
     },
@@ -181,7 +182,7 @@ export const portfolioData: PortfolioData = {
         'Van probleemanalyse naar een werkend AI-gedreven prototype dat een concreet bedrijfskundig knelpunt oplost en aantoonbare waarde levert.',
       badgeColor: {
         bg: 'bg-cyan-500/10',
-        text: 'text-cyan-400',
+        text: 'text-cyan-700 dark:text-cyan-400',
         border: 'border-cyan-500/30',
         glow: 'group-hover:shadow-cyan-500/10',
       },
@@ -224,7 +225,7 @@ export const portfolioData: PortfolioData = {
         'Toetsen van AI-toepassingen aan wettelijke kaders (zoals de EU AI Act), privacy, dataveiligheid, bias en maatschappelijke verantwoordelijkheid.',
       badgeColor: {
         bg: 'bg-emerald-500/10',
-        text: 'text-emerald-400',
+        text: 'text-emerald-700 dark:text-emerald-400',
         border: 'border-emerald-500/30',
         glow: 'group-hover:shadow-emerald-500/10',
       },
@@ -256,7 +257,7 @@ export const portfolioData: PortfolioData = {
         'Doelgericht en vaardig inzetten van state-of-the-art AI-modellen, prompt engineering, APIs en low-code/code integratietechnieken.',
       badgeColor: {
         bg: 'bg-amber-500/10',
-        text: 'text-amber-400',
+        text: 'text-amber-700 dark:text-amber-400',
         border: 'border-amber-500/30',
         glow: 'group-hover:shadow-amber-500/10',
       },
@@ -299,7 +300,7 @@ export const portfolioData: PortfolioData = {
         'Actief richting geven aan het eigen leerproces, effectief Scrum/Agile hanteren, feedback benutten en methodisch reflecteren.',
       badgeColor: {
         bg: 'bg-rose-500/10',
-        text: 'text-rose-400',
+        text: 'text-rose-700 dark:text-rose-400',
         border: 'border-rose-500/30',
         glow: 'group-hover:shadow-rose-500/10',
       },
@@ -333,7 +334,7 @@ export const portfolioData: PortfolioData = {
     field: 'Procesmanagement & Technische Bedrijfskunde',
     status: 'Onderzoek in voorbereiding',
     summary:
-      'Dit onderzoek richt zich op het inzichtelijk maken hoe generatieve en agentische AI-oplossingen op verantwoorde wijze kunnen worden geïmplementeerd binnen MKB-productie- en handelsbedrijven. Hierbij wordt onderzocht waar de omslag ligt tussen traditionele procesautomatisering (zoals RPA/Power Automate) en autonome cognitieve agents, met speciale aandacht voor traceerbaarheid, audit trails en menselijke tussenkomst.',
+      'Dit onderzoek maakt inzichtelijk hoe generatieve en agentische AI verantwoord kan worden ingezet binnen MKB-productie- en handelsbedrijven. Centraal staat de omslag tussen traditionele procesautomatisering (RPA/Power Automate) en autonome cognitieve agents, met aandacht voor traceerbaarheid, audit trails en menselijke tussenkomst.',
     subQuestions: [
       {
         number: 'Deelvraag 1',
@@ -356,8 +357,10 @@ export const portfolioData: PortfolioData = {
     ],
     expectedOutcome:
       'Een integraal onderzoeksrapport inclusief een direct toepasbaar beslismodel voor procesmanagers en een gevalideerd proof-of-concept prototype.',
-    publicationDate: 'Verwachte oplevering: na Sprint 6 (Week 14, 2026)',
+    publicationDate: 'Verwachte oplevering: na Sprint 6 (week 12, 2026)',
     reportUrl: undefined, // Wordt actief zodra rapport gepubliceerd is
+    diagramImage: '/images/onderzoek/onderzoeksmodel.webp',
+    diagramImageAlt: 'Schema van het onderzoeksmodel: hoofdvraag, drie deelvragen en verwachte eindrapportage',
   },
 
   projects: [
@@ -367,11 +370,13 @@ export const portfolioData: PortfolioData = {
       status: 'In ontwikkeling',
       sprint: 'Sprint 1 - 2',
       description:
-        'Wordt binnenkort toegevoegd zodra dit prototype in ontwikkeling gaat.',
+        'Gepland voor sprint 1–2: een eerste AI-prototype rond een concreet procesknelpunt. Inhoud volgt zodra de bouw start.',
       learningOutcomes: [],
       techStack: [],
       demoUrl: undefined,
       githubUrl: undefined,
+      image: '/images/projecten/project-1.webp',
+      imageAlt: 'Screenshot van het prototype van Project 1',
     },
     {
       id: 'proj-2',
@@ -379,11 +384,13 @@ export const portfolioData: PortfolioData = {
       status: 'Gepland',
       sprint: 'Sprint 3 - 4',
       description:
-        'Wordt binnenkort toegevoegd zodra dit prototype in ontwikkeling gaat.',
+        'Gepland voor sprint 3–4: opschaling en diepere integratie in informatiesystemen. Inhoud volgt zodra de bouw start.',
       learningOutcomes: [],
       techStack: [],
       demoUrl: undefined,
       githubUrl: undefined,
+      image: '/images/projecten/project-2.webp',
+      imageAlt: 'Screenshot van het prototype van Project 2',
     },
     {
       id: 'proj-3',
@@ -391,11 +398,13 @@ export const portfolioData: PortfolioData = {
       status: 'Gepland',
       sprint: 'Sprint 5 - 6',
       description:
-        'Wordt binnenkort toegevoegd zodra dit prototype in ontwikkeling gaat.',
+        'Gepland voor sprint 5–6: validatie van de oplossing met meetbare resultaten. Inhoud volgt zodra de bouw start.',
       learningOutcomes: [],
       techStack: [],
       demoUrl: undefined,
       githubUrl: undefined,
+      image: '/images/projecten/project-3.webp',
+      imageAlt: 'Screenshot van het prototype van Project 3',
     },
   ],
 
@@ -404,7 +413,7 @@ export const portfolioData: PortfolioData = {
       sprintNumber: 1,
       title: 'Kick-off & Probleemverkenning',
       period: 'Week 1 - 2',
-      theme: 'Oriëntatie op AI-mogelijkheden in procesautomatisering & tooling selectie',
+      theme: 'Prompting & diepgaand onderzoek, vibe coding: van idee naar portfoliowebsite',
       isCurrent: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
@@ -500,7 +509,7 @@ export const portfolioData: PortfolioData = {
       sprintNumber: 2,
       title: 'Architectuur & Datakaders',
       period: 'Week 3 - 4',
-      theme: 'Data-inname, API integratie en toetsing aan EU AI Act',
+      theme: 'AI-ondersteund programmeren (IDE, GitHub) & LLM\'s integreren in eigen applicaties',
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
@@ -519,7 +528,7 @@ export const portfolioData: PortfolioData = {
       sprintNumber: 3,
       title: 'Prototype Iteratie 1 (POC)',
       period: 'Week 5 - 6',
-      theme: 'Eerste werkende Proof of Concept & initiële gebruikerstests',
+      theme: 'Procesautomatisering met no-code workflows & machine learning/neurale netwerken',
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
@@ -538,7 +547,7 @@ export const portfolioData: PortfolioData = {
       sprintNumber: 4,
       title: 'Midterm Review & Verdieping',
       period: 'Week 7 - 8',
-      theme: 'Evaluatie eerste project, midterm presentatie en verfijning backlog',
+      theme: 'Geavanceerde AI-workflows (n8n, agents) & AI-oplossingen specificeren en afbakenen',
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
@@ -557,7 +566,7 @@ export const portfolioData: PortfolioData = {
       sprintNumber: 5,
       title: 'Start Tweede Oplossing & Opschaling',
       period: 'Week 9 - 10',
-      theme: 'Ontwerp van AI-oplossing 2 & diepere integratie in informatiesystemen',
+      theme: 'Verantwoord AI-gebruik: ethiek en duurzaamheid & posterpresentatie',
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
@@ -576,7 +585,7 @@ export const portfolioData: PortfolioData = {
       sprintNumber: 6,
       title: 'Validatie & Eindrapportage Onderzoek',
       period: 'Week 11 - 12',
-      theme: 'Kwantitatieve dataverzameling, afronding onderzoeksverslag',
+      theme: 'AI-agents en multi-agent systemen & design thinking voor AI-oplossingen',
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
@@ -595,7 +604,7 @@ export const portfolioData: PortfolioData = {
       sprintNumber: 7,
       title: 'Eindproduct Polijsten & Portfolio Bouw',
       period: 'Week 13 - 14',
-      theme: 'Definitieve bewijsstukken koppelen per LU en documentatie finaliseren',
+      theme: 'AI en recht (AI Act, AVG) & businesscase: van prototype naar waarde',
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
@@ -614,7 +623,7 @@ export const portfolioData: PortfolioData = {
       sprintNumber: 8,
       title: 'Eindassessment & Exposities',
       period: 'Week 15 - 16',
-      theme: 'Eindpresentatie minor, assessmentsessie en afronding portfolio',
+      theme: 'Kennistoets, eindpresentatie minor, assessmentsessie en afronding portfolio',
       isUpcoming: true,
       researchStories: {
         linkedLUs: ['LU1', 'LU3'],
@@ -635,7 +644,7 @@ export const portfolioData: PortfolioData = {
     email: 'max.devries1@student.hu.nl',
     institution: 'Hogeschool Utrecht',
     programme: 'Technische Bedrijfskunde',
-    minor: 'Minor Future-proof met AI! (2026)',
+    minor: 'Minor Futureproof met AI! (2026)',
     location: 'Utrecht, Nederland',
     socialLinks: {
       // Structuur voorbereid voor latere activatie:

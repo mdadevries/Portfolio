@@ -1,13 +1,73 @@
 @import "tailwindcss";
 
+/* Class-based dark mode i.p.v. alleen prefers-color-scheme, zodat de
+   schakelaar in de Navbar het thema kan forceren. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
+  :root {
+    /* Lichte modus (standaard) */
+    --bg: 255 255 255;
+    --bg-deep: 248 250 252;
+    --surface: 255 255 255;
+    --surface-sunken: 248 250 252;
+    --surface-hover: 241 245 249;
+    --border: 226 232 240;
+    --border-subtle: 226 232 240;
+    --border-muted: 226 232 240;
+    --border-hover: 203 213 225;
+
+    --text-primary: 15 23 42;
+    --text-secondary: 30 41 59;
+    --text-tertiary: 71 85 105;
+    --text-muted: 100 116 139;
+    --text-faint: 148 163 184;
+  }
+
+  .dark {
+    /* Donkere modus — het bestaande donkerblauwe palet */
+    --bg: 10 26 51;         /* #0A1A33 */
+    --bg-deep: 7 21 43;     /* #07152B */
+    --surface: 15 36 71;    /* #0F2447 */
+    --surface-sunken: 8 21 43; /* #08152B */
+    --surface-hover: 21 43 82; /* #152B52 */
+    --border: 30 58 104;    /* #1E3A68 */
+    --border-subtle: 22 45 80; /* #162D50 */
+    --border-muted: 27 54 95;  /* #1B365F */
+    --border-hover: 42 75 130; /* #2A4B82 */
+
+    --text-primary: 255 255 255;
+    --text-secondary: 226 232 240; /* slate-200 */
+    --text-tertiary: 203 213 225;  /* slate-300 */
+    --text-muted: 148 163 184;     /* slate-400 */
+    --text-faint: 100 116 139;     /* slate-500 */
+  }
+
+  html {
+    color-scheme: light dark;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text-secondary));
   }
-  
+
   h1, h2, h3, .font-display {
     font-family: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
     letter-spacing: -0.02em;
   }
-}
 
+  /* Minder animatie voor wie dat wil */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

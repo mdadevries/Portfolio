@@ -20,6 +20,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { portfolioData } from '../data/portfolioData.ts';
 import { LearningOutcome, EvidenceItem, EvidenceFormat } from '../types.ts';
+import { SmartImage } from './SmartImage.tsx';
 
 export const LearningOutcomesSection: React.FC = () => {
   const { learningOutcomes } = portfolioData;
@@ -61,23 +62,23 @@ export const LearningOutcomesSection: React.FC = () => {
     switch (status) {
       case 'Afgerond':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
-            <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300">
+            <CheckCircle2 className="w-3 h-3 text-emerald-700 dark:text-emerald-400" />
             Afgerond
           </span>
         );
       case 'In uitvoering':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-cyan-500/15 border border-cyan-500/30 text-cyan-300">
-            <Clock className="w-3 h-3 text-cyan-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-cyan-500/15 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300">
+            <Clock className="w-3 h-3 text-cyan-700 dark:text-cyan-400" />
             In uitvoering
           </span>
         );
       case 'Binnenkort':
       default:
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#0A1A33] text-slate-300 border border-[#1E3A68]">
-            <Calendar className="w-3 h-3 text-slate-400" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[rgb(var(--bg))] text-[rgb(var(--text-tertiary))] border border-[rgb(var(--border))]">
+            <Calendar className="w-3 h-3 text-[rgb(var(--text-muted))]" />
             Binnenkort
           </span>
         );
@@ -88,19 +89,19 @@ export const LearningOutcomesSection: React.FC = () => {
     switch (storyType) {
       case 'Research':
         return (
-          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30">
             Research Story
           </span>
         );
       case 'User':
         return (
-          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
             User Story
           </span>
         );
       case 'Learning':
         return (
-          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
             Learning Story
           </span>
         );
@@ -112,19 +113,19 @@ export const LearningOutcomesSection: React.FC = () => {
   return (
     <section
       id="leeruitkomsten"
-      className="py-20 md:py-28 relative border-t border-[#162D50] bg-[#0A1A33]"
+      className="py-20 md:py-28 relative border-t border-[rgb(var(--border-subtle))] bg-[rgb(var(--bg))]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#0F2447] border border-[#1E3A68] text-slate-200 mb-4 shadow-sm">
-            <GraduationCap className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[rgb(var(--surface))] border border-[rgb(var(--border))] text-[rgb(var(--text-secondary))] mb-4 shadow-sm">
+            <GraduationCap className="w-3.5 h-3.5 text-cyan-700 dark:text-cyan-400" />
             <span>Toetsing & Bewijsvoering</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[rgb(var(--text-primary))] tracking-tight mb-4">
             Leeruitkomsten (LU1 t/m LU5)
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+          <p className="text-[rgb(var(--text-tertiary))] text-base sm:text-lg leading-relaxed">
             Per officiële minor-leeruitkomst vind je hier de doelstelling, beoordelingscriteria en
             de gekoppelde bewijsstukken. Selecteer links (of hierboven op mobiel) een leeruitkomst
             om de details en voortgang te bekijken.
@@ -133,7 +134,7 @@ export const LearningOutcomesSection: React.FC = () => {
 
         {/* Mobile Filter Bar (Visible on mobile/tablet screens below lg) */}
         <div className="lg:hidden mb-8">
-          <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider block mb-2">
+          <span className="text-[11px] font-semibold text-[rgb(var(--text-tertiary))] uppercase tracking-wider block mb-2">
             Selecteer leeruitkomst:
           </span>
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
@@ -147,11 +148,11 @@ export const LearningOutcomesSection: React.FC = () => {
                   className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all shrink-0 flex items-center gap-2 ${
                     isSelected
                       ? 'bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-md shadow-cyan-500/25 font-bold'
-                      : 'bg-[#0F2447] text-slate-300 border border-[#1E3A68]'
+                      : 'bg-[rgb(var(--surface))] text-[rgb(var(--text-tertiary))] border border-[rgb(var(--border))]'
                   }`}
                 >
                   <span>{lu.code}</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-[#0A1A33]/70 font-normal">
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-[rgb(var(--bg))]/70 font-normal">
                     {lu.evidence.length} {lu.evidence.length === 1 ? 'item' : 'items'}
                   </span>
                 </button>
@@ -164,9 +165,9 @@ export const LearningOutcomesSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Sticky Sidebar (Desktop only) */}
           <div className="hidden lg:block lg:col-span-4 sticky top-24 space-y-3">
-            <div className="p-3.5 rounded-2xl bg-[#08152B]/85 border border-[#1E3A68]/80 text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center justify-between">
+            <div className="p-3.5 rounded-2xl bg-[rgb(var(--surface-sunken))]/85 border border-[rgb(var(--border))]/80 text-xs font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-wider flex items-center justify-between">
               <span>Leeruitkomsten (5)</span>
-              <span className="text-cyan-400 font-mono text-[11px]">Minor AI</span>
+              <span className="text-cyan-700 dark:text-cyan-400 font-mono text-[11px]">Minor AI</span>
             </div>
 
             <div className="space-y-2.5">
@@ -179,8 +180,8 @@ export const LearningOutcomesSection: React.FC = () => {
                     onClick={() => setSelectedLUId(lu.id)}
                     className={`w-full text-left p-4 rounded-2xl transition-all duration-200 border flex items-start gap-3.5 group relative overflow-hidden ${
                       isSelected
-                        ? 'bg-[#0F2447] border-cyan-500/50 shadow-lg shadow-cyan-500/10'
-                        : 'bg-[#0F2447]/50 border-[#1E3A68]/70 hover:bg-[#0F2447]/80 hover:border-cyan-500/30'
+                        ? 'bg-[rgb(var(--surface))] border-cyan-500/50 shadow-lg shadow-cyan-500/10'
+                        : 'bg-[rgb(var(--surface))]/50 border-[rgb(var(--border))]/70 hover:bg-[rgb(var(--surface))]/80 hover:border-cyan-500/30'
                     }`}
                   >
                     {/* Active vertical cyan indicator bar */}
@@ -197,14 +198,14 @@ export const LearningOutcomesSection: React.FC = () => {
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-1">
-                        <h3 className={`text-xs font-bold truncate ${isSelected ? 'text-cyan-300' : 'text-white'}`}>
+                        <h3 className={`text-xs font-bold truncate ${isSelected ? 'text-cyan-700 dark:text-cyan-300' : 'text-[rgb(var(--text-primary))]'}`}>
                           {lu.code}: {lu.title.split(' ')[0]} {lu.title.split(' ')[1] || ''}
                         </h3>
-                        <span className="text-[10px] font-semibold text-slate-400 px-1.5 py-0.5 rounded bg-[#0A1A33] border border-[#1E3A68]/80 shrink-0 ml-1">
+                        <span className="text-[10px] font-semibold text-[rgb(var(--text-muted))] px-1.5 py-0.5 rounded bg-[rgb(var(--bg))] border border-[rgb(var(--border))]/80 shrink-0 ml-1">
                           {lu.evidence.length} bewijs
                         </span>
                       </div>
-                      <p className="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">
+                      <p className="text-[11px] text-[rgb(var(--text-tertiary))] line-clamp-2 leading-relaxed">
                         {lu.shortDescription}
                       </p>
                     </div>
@@ -214,8 +215,8 @@ export const LearningOutcomesSection: React.FC = () => {
             </div>
 
             {/* Assessment Meta Note */}
-            <div className="p-4 rounded-2xl bg-[#08152B]/60 border border-[#1E3A68]/60 text-xs text-slate-300">
-              <span className="text-white font-semibold block mb-1">Beoordelingsstructuur:</span>
+            <div className="p-4 rounded-2xl bg-[rgb(var(--surface-sunken))]/60 border border-[rgb(var(--border))]/60 text-xs text-[rgb(var(--text-tertiary))]">
+              <span className="text-[rgb(var(--text-primary))] font-semibold block mb-1">Beoordelingsstructuur:</span>
               <span>
                 Elke leeruitkomst wordt cyclisch getoetst via opgebouwde bewijslast uit de 8 sprints.
               </span>
@@ -232,10 +233,10 @@ export const LearningOutcomesSection: React.FC = () => {
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.25 }}
                 id={`lu-card-${currentLU.id.toLowerCase()}`}
-                className="rounded-3xl bg-[#0F2447]/75 border border-[#1E3A68]/90 p-6 sm:p-8 backdrop-blur-md shadow-xl shadow-black/25"
+                className="rounded-3xl bg-[rgb(var(--surface))]/75 border border-[rgb(var(--border))]/90 p-6 sm:p-8 backdrop-blur-md shadow-xl shadow-black/25"
               >
                 {/* Header Row */}
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-6 border-b border-[#1E3A68]/70">
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-6 border-b border-[rgb(var(--border))]/70">
                   <div className="flex items-start gap-4">
                     {/* Badge */}
                     <div
@@ -248,14 +249,14 @@ export const LearningOutcomesSection: React.FC = () => {
 
                     <div>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">
+                        <span className="text-xs font-semibold text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
                           Officiële Leeruitkomst
                         </span>
                       </div>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white leading-snug">
+                      <h3 className="text-xl sm:text-2xl font-bold text-[rgb(var(--text-primary))] leading-snug">
                         {currentLU.title}
                       </h3>
-                      <p className="text-sm text-slate-200 mt-2 leading-relaxed">
+                      <p className="text-sm text-[rgb(var(--text-secondary))] mt-2 leading-relaxed">
                         {currentLU.shortDescription}
                       </p>
                     </div>
@@ -265,14 +266,14 @@ export const LearningOutcomesSection: React.FC = () => {
                   <button
                     id={`toggle-criteria-btn-${currentLU.id.toLowerCase()}`}
                     onClick={() => toggleCriteria(currentLU.id)}
-                    className="self-start md:self-center inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-[#0A1A33] text-slate-200 border border-[#1E3A68] hover:bg-[#152B52] transition-colors shadow-sm shrink-0"
+                    className="self-start md:self-center inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-[rgb(var(--bg))] text-[rgb(var(--text-secondary))] border border-[rgb(var(--border))] hover:bg-[rgb(var(--surface-hover))] transition-colors shadow-sm shrink-0"
                     aria-expanded={isCriteriaOpen}
                   >
                     <span>{isCriteriaOpen ? 'Verberg Criteria' : 'Bekijk Criteria'}</span>
                     {isCriteriaOpen ? (
-                      <ChevronUp className="w-3.5 h-3.5 text-slate-400" />
+                      <ChevronUp className="w-3.5 h-3.5 text-[rgb(var(--text-muted))]" />
                     ) : (
-                      <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                      <ChevronDown className="w-3.5 h-3.5 text-[rgb(var(--text-muted))]" />
                     )}
                   </button>
                 </div>
@@ -287,8 +288,8 @@ export const LearningOutcomesSection: React.FC = () => {
                       transition={{ duration: 0.25 }}
                       className="overflow-hidden"
                     >
-                      <div className="py-5 px-5 my-5 rounded-2xl bg-[#08152B]/95 border border-[#1E3A68]">
-                        <h4 className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+                      <div className="py-5 px-5 my-5 rounded-2xl bg-[rgb(var(--surface-sunken))]/95 border border-[rgb(var(--border))]">
+                        <h4 className="text-xs font-bold text-cyan-700 dark:text-cyan-300 uppercase tracking-wider mb-3 flex items-center gap-2">
                           <Info className="w-3.5 h-3.5" />
                           <span>Officiële Beoordelingscriteria voor {currentLU.code}</span>
                         </h4>
@@ -296,7 +297,7 @@ export const LearningOutcomesSection: React.FC = () => {
                           {currentLU.criteria.map((crit, idx) => (
                             <li
                               key={idx}
-                              className="text-xs sm:text-sm text-slate-200 flex items-start gap-2.5 leading-relaxed"
+                              className="text-xs sm:text-sm text-[rgb(var(--text-secondary))] flex items-start gap-2.5 leading-relaxed"
                             >
                               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 shrink-0" />
                               <span>{crit}</span>
@@ -311,11 +312,11 @@ export const LearningOutcomesSection: React.FC = () => {
                 {/* Evidence items section */}
                 <div className="pt-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
-                      <Layers className="w-3.5 h-3.5 text-indigo-400" />
+                    <h4 className="text-xs font-bold text-[rgb(var(--text-tertiary))] uppercase tracking-wider flex items-center gap-2">
+                      <Layers className="w-3.5 h-3.5 text-indigo-700 dark:text-indigo-400" />
                       <span>Gekoppelde Bewijsstukken voor {currentLU.code}</span>
                     </h4>
-                    <span className="text-xs text-slate-300">
+                    <span className="text-xs text-[rgb(var(--text-tertiary))]">
                       {currentLU.evidence.length} {currentLU.evidence.length === 1 ? 'item' : 'items'} gekoppeld
                     </span>
                   </div>
@@ -326,9 +327,19 @@ export const LearningOutcomesSection: React.FC = () => {
                       <div
                         key={item.id}
                         id={`evidence-card-${item.id}`}
-                        className="rounded-2xl bg-[#08152B]/90 border border-[#1B365F]/85 p-4 sm:p-5 hover:border-cyan-500/40 transition-all flex flex-col justify-between group shadow-md"
+                        className="rounded-2xl bg-[rgb(var(--surface-sunken))]/90 border border-[rgb(var(--border-muted))]/85 overflow-hidden hover:border-cyan-500/40 transition-all flex flex-col justify-between group shadow-md"
                       >
                         <div>
+                          {item.image && (
+                            <SmartImage
+                              src={item.image}
+                              alt={item.imageAlt || item.title}
+                              aspect="aspect-video"
+                              rounded="rounded-none"
+                              showCaption={false}
+                            />
+                          )}
+                          <div className="p-4 sm:p-5 pb-0">
                           {/* Badges row */}
                           <div className="flex items-center justify-between gap-2 mb-3">
                             <div className="flex flex-wrap items-center gap-1.5">
@@ -337,14 +348,14 @@ export const LearningOutcomesSection: React.FC = () => {
                                 item.formats.map((fmt, fIdx) => (
                                   <span
                                     key={fIdx}
-                                    className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-300 bg-[#0A1A33] px-2 py-0.5 rounded-md border border-[#1E3A68]"
+                                    className="inline-flex items-center gap-1 text-[11px] font-medium text-[rgb(var(--text-tertiary))] bg-[rgb(var(--bg))] px-2 py-0.5 rounded-md border border-[rgb(var(--border))]"
                                   >
                                     {getFormatIcon(fmt)}
                                     {fmt}
                                   </span>
                                 ))
                               ) : item.format ? (
-                                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-300 bg-[#0A1A33] px-2 py-0.5 rounded-md border border-[#1E3A68]">
+                                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[rgb(var(--text-tertiary))] bg-[rgb(var(--bg))] px-2 py-0.5 rounded-md border border-[rgb(var(--border))]">
                                   {getFormatIcon(item.format)}
                                   {item.format}
                                 </span>
@@ -354,20 +365,21 @@ export const LearningOutcomesSection: React.FC = () => {
                           </div>
 
                           {/* Evidence Title */}
-                          <h5 className="text-sm sm:text-base font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                          <h5 className="text-sm sm:text-base font-bold text-[rgb(var(--text-primary))] mb-2 group-hover:text-cyan-700 dark:text-cyan-300 transition-colors">
                             {item.title}
                           </h5>
 
                           {/* Summary */}
-                          <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                          <p className="text-xs text-[rgb(var(--text-tertiary))] leading-relaxed mb-4">
                             {item.summary}
                           </p>
+                          </div>
                         </div>
 
                         {/* Bottom Meta & Link Buttons */}
-                        <div className="pt-3 border-t border-[#1E3A68]/70 flex flex-wrap items-center justify-between gap-2">
-                          <span className="text-[11px] font-medium text-slate-300 flex items-center gap-1.5">
-                            <Calendar className="w-3 h-3 text-cyan-400" />
+                        <div className="p-4 sm:p-5 pt-3 mt-0 border-t border-[rgb(var(--border))]/70 flex flex-wrap items-center justify-between gap-2">
+                          <span className="text-[11px] font-medium text-[rgb(var(--text-tertiary))] flex items-center gap-1.5">
+                            <Calendar className="w-3 h-3 text-cyan-700 dark:text-cyan-400" />
                             {item.dateOrSprint}
                           </span>
 
@@ -379,10 +391,10 @@ export const LearningOutcomesSection: React.FC = () => {
                                   href={link.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/15 text-cyan-300 hover:bg-cyan-500/25 border border-cyan-500/40 transition-colors shadow-sm"
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/25 border border-cyan-500/40 transition-colors shadow-sm"
                                 >
                                   <span>{link.label}</span>
-                                  <ExternalLink className="w-3 h-3 text-cyan-400" />
+                                  <ExternalLink className="w-3 h-3 text-cyan-700 dark:text-cyan-400" />
                                 </a>
                               ))}
                             </div>
@@ -391,13 +403,13 @@ export const LearningOutcomesSection: React.FC = () => {
                               href={item.linkUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/15 text-cyan-300 hover:bg-cyan-500/25 border border-cyan-500/40 transition-colors shadow-sm"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/25 border border-cyan-500/40 transition-colors shadow-sm"
                             >
                               <span>Open Bewijsstuk</span>
                               <ExternalLink className="w-3 h-3" />
                             </a>
                           ) : (
-                            <span className="text-[11px] font-medium text-slate-400 italic">
+                            <span className="text-[11px] font-medium text-[rgb(var(--text-muted))] italic">
                               Link volgt na publicatie
                             </span>
                           )}
@@ -406,14 +418,10 @@ export const LearningOutcomesSection: React.FC = () => {
                     ))}
                   </div>
 
-                  {/* Informational Hint for Max */}
-                  <div className="mt-5 p-3 rounded-2xl bg-[#08152B]/60 border border-dashed border-[#1E3A68]/90 flex items-center justify-between text-[11px] text-slate-300">
-                    <span>
-                      💡 <strong>Tip voor Max:</strong> Je kunt nieuwe bewijsstukken rechtstreeks
-                      toevoegen in <code className="text-cyan-300 font-mono">src/data/portfolioData.ts</code> onder{' '}
-                      <code className="text-cyan-300 font-mono">{currentLU.id}.evidence</code>.
-                    </span>
-                  </div>
+                  {/*
+                    Nieuwe bewijsstukken toevoegen: src/data/portfolioData.ts,
+                    onder learningOutcomes[].evidence (niet zichtbaar voor bezoekers).
+                  */}
                 </div>
               </motion.div>
             </AnimatePresence>
