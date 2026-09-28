@@ -270,25 +270,27 @@ export const portfolioData: PortfolioData = {
       evidence: [
         {
           id: 'ev-lu4-1',
-          title: 'Voorbeeld: Benchmarkstudie: LLM APIs vs. Lokale Modellen voor Bedrijfsdata',
-          storyType: 'Learning',
-          format: 'PDF Rapport',
-          status: 'In uitvoering',
-          dateOrSprint: 'Sprint 2',
+          title: 'Herbruikbaar promptsjabloon voor procesanalyse',
+          storyType: 'User',
+          format: 'Document',
+          status: 'Afgerond',
+          dateOrSprint: 'Sprint 1',
           summary:
-            'Vergelijkend experiment tussen OpenAI gpt-4o, Claude 3.5 Sonnet en lokale Ollama/Mistral modellen qua precisie en privacy.',
-          tag: 'Benchmarking',
+            'Werkend promptsjabloon dat AI vraagt om een bedrijfsproces te analyseren (stappen, knelpunten, verbeterpunten), getest op een voorbeeldproces en herbruikbaar in latere sprints.',
+          links: SHARED_EVIDENCE.userPromptSjabloon.links,
+          tag: 'Prompt engineering',
         },
         {
           id: 'ev-lu4-2',
-          title: 'Voorbeeld: Repository: n8n AI-Agent Workflow Configuraties',
+          title: 'Portfoliowebsite gebouwd met AI Studio',
           storyType: 'User',
-          format: 'GitHub Repo',
-          status: 'Binnenkort',
-          dateOrSprint: 'Sprint 4',
+          format: 'Website',
+          status: 'In uitvoering',
+          dateOrSprint: 'Sprint 1',
           summary:
-            'Gedocumenteerde n8n flows met custom tool calling en structured JSON schema output.',
-          tag: 'Code',
+            'Deze portfoliowebsite zelf: gebouwd met AI Studio/vibe coding en doorontwikkeld met AI-ondersteuning, met per leeruitkomst een herkenbare sectie en navolgbare opbouw via GitHub/Vercel.',
+          links: SHARED_EVIDENCE.userPortfolioSite.links,
+          tag: 'AI-tool gebruik',
         },
       ],
     },
@@ -313,13 +315,25 @@ export const portfolioData: PortfolioData = {
       evidence: [
         {
           id: 'ev-lu5-1',
-          title: 'Voorbeeld: Sprint Retrospectives & Voortgangslogboek (Sprint 1 t/m 8)',
+          title: 'Sprint Retrospectives & Voortgangslogboek (Sprint 1 t/m 8)',
           storyType: 'Learning',
           format: 'Notion Document',
           status: 'In uitvoering',
           dateOrSprint: 'Wekelijks',
           summary:
             'Overzicht van burn-down, velocity, feedbacknotities en leermomenten per sprintcyclus.',
+          tag: 'Zelfsturing',
+        },
+        {
+          id: 'ev-lu5-2',
+          title: 'Planmatige werkwijze via Research-, User- en Learning Stories',
+          storyType: 'Learning',
+          format: 'Document',
+          status: 'Afgerond',
+          dateOrSprint: 'Sprint 1',
+          summary:
+            'Iedere sprint methodisch gepland en uitgevoerd volgens Scrum/Agile: heldere Research-, User- en Learning Stories met acceptatie- en kwaliteitscriteria, zichtbaar in de sprint-tijdlijn.',
+          links: [{ label: 'Bekijk sprint-aanpak', url: '#sprints' }],
           tag: 'Zelfsturing',
         },
       ],
@@ -416,13 +430,14 @@ export const portfolioData: PortfolioData = {
       theme: 'Prompting & diepgaand onderzoek, vibe coding: van idee naar portfoliowebsite',
       isCurrent: true,
       researchStories: {
-        linkedLUs: ['LU1', 'LU3'],
+        linkedLUs: ['LU1', 'LU4'],
         stories: [
           {
             role: 'student Technische Bedrijfskunde',
             goal: 'via deskresearch onderzoeken welke kerntaken van een procesmanager gaan veranderen door generatieve AI',
             value: 'ik onderbouwd kan bepalen welke kennis en vaardigheden ik verder moet ontwikkelen.',
             status: 'Afgerond',
+            linkedLUs: ['LU1'],
             evidenceLinks: SHARED_EVIDENCE.researchKerntaken.links,
             acceptanceCriteria: [
               'Minimaal 3 kerntaken van een procesmanager zijn geïdentificeerd en onderzocht',
@@ -440,6 +455,7 @@ export const portfolioData: PortfolioData = {
             goal: 'via deskresearch onderzoeken welke AI-functionaliteiten beschikbaar zijn binnen n8n en Power Automate',
             value: 'ik onderbouwd kan bepalen hoe ik deze tools in de toekomst effectiever kan inzetten.',
             status: 'Afgerond',
+            linkedLUs: ['LU1', 'LU4'],
             evidenceLinks: SHARED_EVIDENCE.researchN8nPowerAutomate.links,
             acceptanceCriteria: [
               'Voor beide tools is onderzocht welke AI-functionaliteiten beschikbaar zijn',
@@ -455,13 +471,14 @@ export const portfolioData: PortfolioData = {
         ],
       },
       userStories: {
-        linkedLUs: ['LU2', 'LU4'],
+        linkedLUs: ['LU4', 'LU5'],
         stories: [
           {
             role: 'student',
             goal: 'met AI Studio/Lovable een eigen portfoliowebsite bouwen',
             value: 'ik daar mijn bewijs per leeruitkomst op kan verzamelen.',
             status: 'In uitvoering',
+            linkedLUs: ['LU4', 'LU5'],
             evidenceLinks: SHARED_EVIDENCE.userPortfolioSite.links,
             acceptanceCriteria: [
               'De website is online en heeft per leeruitkomst een eigen, herkenbare sectie',
@@ -479,6 +496,7 @@ export const portfolioData: PortfolioData = {
             goal: 'een herbruikbaar promptsjabloon ontwikkelen waarmee ik AI kan inzetten om processen te analyseren',
             value: 'ik dit sjabloon in latere sprints steeds opnieuw kan gebruiken.',
             status: 'Afgerond',
+            linkedLUs: ['LU4'],
             evidenceLinks: SHARED_EVIDENCE.userPromptSjabloon.links,
             acceptanceCriteria: [
               'Er is een werkend promptsjabloon dat AI vraagt om een proces te analyseren (stappen, knelpunten, verbeterpunten)',
@@ -493,14 +511,16 @@ export const portfolioData: PortfolioData = {
         ],
       },
       learningStories: {
-        linkedLUs: ['LU4', 'LU5'],
+        linkedLUs: ['LU5'],
         stories: [
           {
             role: 'student',
             goal: 'eerste leerervaringen en methodische reflectie vormgeven',
             value: 'ik doelgericht kan bijsturen in de opvolgende sprints.',
             status: 'In uitvoering',
-            evidenceNote: 'Bewijs volgt zodra deze story is afgerond.',
+            linkedLUs: ['LU5'],
+            evidenceNote:
+              'Sprint-logboek wordt bijgehouden en volgt hier zodra gepubliceerd; de planmatige, story-gedreven werkwijze is ondertussen te volgen via de sprint-tijdlijn hierboven.',
           },
         ],
       },

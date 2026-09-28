@@ -16,6 +16,7 @@ import {
   Info,
   Layers,
   Search,
+  Globe,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { portfolioData } from '../data/portfolioData.ts';
@@ -53,6 +54,8 @@ export const LearningOutcomesSection: React.FC = () => {
         return <Presentation className="w-3.5 h-3.5" />;
       case 'Miro Board':
         return <Layout className="w-3.5 h-3.5" />;
+      case 'Website':
+        return <Globe className="w-3.5 h-3.5" />;
       default:
         return <FileText className="w-3.5 h-3.5" />;
     }

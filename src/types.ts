@@ -11,7 +11,8 @@ export type EvidenceFormat =
   | 'Presentatie'
   | 'Miro Board'
   | 'Document'
-  | 'Notion Document';
+  | 'Notion Document'
+  | 'Website';
 
 export interface EvidenceLink {
   label: string;
@@ -88,6 +89,10 @@ export interface SprintStory {
   goal: string;
   value: string;
   status?: StoryStatus;
+  /** Leeruitkomst(en) waar déze specifieke story aan gekoppeld is (bv. ['LU1']).
+   *  Eerste code = primaire koppeling. Ontbreekt dit veld, dan valt de sectie
+   *  terug op de linkedLUs van de hele storygroep (researchStories/userStories/learningStories). */
+  linkedLUs?: string[];
   evidenceLinks?: EvidenceLink[];
   evidenceNote?: string;
   acceptanceCriteria?: string[];

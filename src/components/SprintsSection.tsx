@@ -38,6 +38,23 @@ const STORY_STATUS_STYLES: Record<StoryStatus, string> = {
 
 const STORY_STATUS_OVERRIDES_KEY = 'storyStatusOverrides';
 
+const LU_BADGE_STYLES: Record<'indigo' | 'cyan' | 'amber', string> = {
+  indigo: 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border-indigo-500/30',
+  cyan: 'bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border-cyan-500/30',
+  amber: 'bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-500/30',
+};
+
+/**
+ * Gekoppelde LU's voor een storygroep (Research/User/Learning): als de
+ * afzonderlijke stories hun eigen linkedLUs hebben, wordt dat de (unieke)
+ * bron van waarheid. Zonder per-story koppeling valt het terug op de
+ * koppeling van de hele storygroep (gebruikt door sprints zonder stories).
+ */
+const getGroupLinkedLUs = (group: { stories: SprintStory[]; linkedLUs: string[] }): string[] => {
+  const fromStories = Array.from(new Set(group.stories.flatMap((s) => s.linkedLUs || [])));
+  return fromStories.length > 0 ? fromStories : group.linkedLUs;
+};
+
 const readStatusOverride = (key: string): StoryStatus | null => {
   if (typeof window === 'undefined') return null;
   try {
@@ -113,6 +130,26 @@ const StoryCardItem: React.FC<StoryCardItemProps> = ({
         <span className={`${roleColorClass} font-bold`}>wil ik</span> {story.goal},{' '}
         <span className={`${roleColorClass} font-bold`}>zodat</span> {story.value}
       </p>
+
+      {/* Gekoppelde leeruitkomst(en) van déze specifieke story */}
+      {story.linkedLUs && story.linkedLUs.length > 0 && (
+        <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+          <span className="text-[10px] font-semibold text-[rgb(var(--text-muted))] uppercase tracking-wider">
+            LU:
+          </span>
+          {story.linkedLUs.map((lu, idx) => (
+            <span
+              key={lu}
+              className={`px-2 py-0.5 rounded-md text-[10px] font-bold border ${LU_BADGE_STYLES[accent]} ${
+                idx > 0 ? 'opacity-70' : ''
+              }`}
+              title={idx === 0 ? 'Primaire leeruitkomst' : 'Secundaire leeruitkomst'}
+            >
+              {lu}
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* Collapsible Criteria (Accordion, default collapsed) */}
       {hasCriteria && (
@@ -486,7 +523,7 @@ export const SprintsSection: React.FC = () => {
                 <div className="pt-3 border-t border-[rgb(var(--border))]/80 flex items-center justify-between text-xs">
                   <span className="text-[rgb(var(--text-tertiary))]">Gekoppeld:</span>
                   <div className="flex flex-wrap gap-1 font-bold">
-                    {currentSprint.researchStories.linkedLUs.map((lu) => (
+                    {getGroupLinkedLUs(currentSprint.researchStories).map((lu) => (
                       <span
                         key={lu}
                         className="px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30 text-[11px]"
@@ -552,7 +589,7 @@ export const SprintsSection: React.FC = () => {
                 <div className="pt-3 border-t border-[rgb(var(--border))]/80 flex items-center justify-between text-xs">
                   <span className="text-[rgb(var(--text-tertiary))]">Gekoppeld:</span>
                   <div className="flex flex-wrap gap-1 font-bold">
-                    {currentSprint.userStories.linkedLUs.map((lu) => (
+                    {getGroupLinkedLUs(currentSprint.userStories).map((lu) => (
                       <span
                         key={lu}
                         className="px-2 py-0.5 rounded-md bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 text-[11px]"
@@ -618,7 +655,7 @@ export const SprintsSection: React.FC = () => {
                 <div className="pt-3 border-t border-[rgb(var(--border))]/80 flex items-center justify-between text-xs">
                   <span className="text-[rgb(var(--text-tertiary))]">Gekoppeld:</span>
                   <div className="flex flex-wrap gap-1 font-bold">
-                    {currentSprint.learningStories.linkedLUs.map((lu) => (
+                    {getGroupLinkedLUs(currentSprint.learningStories).map((lu) => (
                       <span
                         key={lu}
                         className="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-[11px]"
