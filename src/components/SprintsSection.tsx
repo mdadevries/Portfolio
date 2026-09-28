@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Calendar,
   Search,
@@ -22,6 +22,10 @@ interface StoryCardItemProps {
   accent: 'indigo' | 'cyan' | 'amber';
   /** Unieke sleutel (sprint + type + index) om de handmatige status per story te onthouden */
   storyKey: string;
+  /** Status zoals bekend bij de server (voor alle bezoekers gelijk), zodra opgehaald */
+  overrideStatus?: StoryStatus;
+  /** Meldt een statuswijziging terug aan de sectie, die 'm naar de server stuurt */
+  onStatusChange: (key: string, status: StoryStatus) => void;
 }
 
 const STORY_STATUS_OPTIONS: StoryStatus[] = ['Nog te doen', 'In uitvoering', 'Afgerond'];
@@ -57,15 +61,30 @@ const writeStatusOverride = (key: string, status: StoryStatus) => {
   }
 };
 
-const StoryCardItem: React.FC<StoryCardItemProps> = ({ story, accent, storyKey }) => {
+const StoryCardItem: React.FC<StoryCardItemProps> = ({
+  story,
+  accent,
+  storyKey,
+  overrideStatus,
+  onStatusChange,
+}) => {
   const [isCriteriaOpen, setIsCriteriaOpen] = useState(false);
   const [status, setStatus] = useState<StoryStatus>(
     () => readStatusOverride(storyKey) || story.status || 'Nog te doen'
   );
 
+  // Zodra de status van de server binnenkomt, is die leidend (geldt voor alle bezoekers)
+  useEffect(() => {
+    if (overrideStatus) {
+      setStatus(overrideStatus);
+      writeStatusOverride(storyKey, overrideStatus);
+    }
+  }, [overrideStatus, storyKey]);
+
   const handleStatusChange = (newStatus: StoryStatus) => {
     setStatus(newStatus);
     writeStatusOverride(storyKey, newStatus);
+    onStatusChange(storyKey, newStatus);
   };
 
   const roleColorClass =
@@ -212,6 +231,30 @@ const StoryCardItem: React.FC<StoryCardItemProps> = ({ story, accent, storyKey }
 export const SprintsSection: React.FC = () => {
   const { sprints } = portfolioData;
   const [selectedSprintIndex, setSelectedSprintIndex] = useState<number>(0);
+  const [statusOverrides, setStatusOverrides] = useState<Record<string, StoryStatus>>({});
+
+  // Haal de voor iedereen geldende statussen op bij het laden van de sectie
+  useEffect(() => {
+    fetch('/api/story-status')
+      .then((res) => (res.ok ? res.json() : {}))
+      .then((data: Record<string, StoryStatus>) => {
+        setStatusOverrides((prev) => ({ ...prev, ...data }));
+      })
+      .catch(() => {
+        // API niet bereikbaar — de site blijft werken met lokale/standaardstatussen
+      });
+  }, []);
+
+  const handleStatusChange = (key: string, status: StoryStatus) => {
+    setStatusOverrides((prev) => ({ ...prev, [key]: status }));
+    fetch('/api/story-status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key, status }),
+    }).catch(() => {
+      // Opslaan op de server mislukt — wijziging blijft wel gelden in deze browser
+    });
+  };
 
   const currentSprint: SprintData = sprints[selectedSprintIndex];
   const activeSprintIndex = sprints.findIndex((s) => s.isCurrent);
@@ -431,6 +474,8 @@ export const SprintsSection: React.FC = () => {
                           story={story}
                           accent="indigo"
                           storyKey={`sprint-${currentSprint.sprintNumber}-research-${i}`}
+                          overrideStatus={statusOverrides[`sprint-${currentSprint.sprintNumber}-research-${i}`]}
+                          onStatusChange={handleStatusChange}
                         />
                       ))
                     )}
@@ -495,6 +540,8 @@ export const SprintsSection: React.FC = () => {
                           story={story}
                           accent="cyan"
                           storyKey={`sprint-${currentSprint.sprintNumber}-user-${i}`}
+                          overrideStatus={statusOverrides[`sprint-${currentSprint.sprintNumber}-user-${i}`]}
+                          onStatusChange={handleStatusChange}
                         />
                       ))
                     )}
@@ -559,6 +606,8 @@ export const SprintsSection: React.FC = () => {
                           story={story}
                           accent="amber"
                           storyKey={`sprint-${currentSprint.sprintNumber}-learning-${i}`}
+                          overrideStatus={statusOverrides[`sprint-${currentSprint.sprintNumber}-learning-${i}`]}
+                          onStatusChange={handleStatusChange}
                         />
                       ))
                     )}
